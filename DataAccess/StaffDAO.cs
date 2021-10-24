@@ -34,9 +34,15 @@ namespace DataAccess
         public List<TblStaff> GetAll()
         {
             List<TblStaff> staffs = new List<TblStaff>();
-            using (var ctx = new prn211group4Context())
+            try
             {
-                staffs = ctx.TblStaffs.ToList();
+                using (var ctx = new prn211group4Context())
+                {
+                    staffs = ctx.TblStaffs.ToList();
+                }
+            } catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
             return staffs;
         }
@@ -46,9 +52,15 @@ namespace DataAccess
         public TblStaff GetByID(Guid staffId)
         {
             TblStaff staff = null;
-            using (var ctx = new prn211group4Context())
+            try
             {
-                staff = ctx.TblStaffs.SingleOrDefault(staff => staff.StaffId.Equals(staffId));
+                using (var ctx = new prn211group4Context())
+                {
+                    staff = ctx.TblStaffs.SingleOrDefault(staff => staff.StaffId.Equals(staffId));
+                }
+            } catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
             return staff;
         }
@@ -57,10 +69,17 @@ namespace DataAccess
 
         public void Add(TblStaff staff)
         {
-            using (var ctx = new prn211group4Context())
+            try
             {
-                ctx.TblStaffs.Add(staff);
-                ctx.SaveChanges();
+                using (var ctx = new prn211group4Context())
+                {
+                    ctx.TblStaffs.Add(staff);
+                    ctx.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
@@ -68,10 +87,16 @@ namespace DataAccess
 
         public void Delete(TblStaff staff)
         {
-            using (var ctx = new prn211group4Context())
+            try
             {
-                ctx.TblStaffs.Remove(staff);
-                ctx.SaveChanges();
+                using (var ctx = new prn211group4Context())
+                {
+                    ctx.TblStaffs.Remove(staff);
+                    ctx.SaveChanges();
+                }
+            } catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
@@ -79,10 +104,16 @@ namespace DataAccess
 
         public void Update(TblStaff staff)
         {
-            using (var ctx = new prn211group4Context())
+            try
             {
-                ctx.Entry(staff).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                ctx.SaveChanges();
+                using (var ctx = new prn211group4Context())
+                {
+                    ctx.Entry(staff).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    ctx.SaveChanges();
+                }
+            }
+            catch (Exception ex) { 
+                throw new Exception(ex.Message); 
             }
         }
 
@@ -93,15 +124,22 @@ namespace DataAccess
 
         public bool Login(string Email, string Password)
         {
-            TblStaff staff = null;
-            using (var ctx = new prn211group4Context())
+            try
             {
-                staff = ctx.TblStaffs.SingleOrDefault(staff => staff.Email.Equals(Email) && staff.Password.Equals(Password));
+                TblStaff staff = null;
+                using (var ctx = new prn211group4Context())
+                {
+                    staff = ctx.TblStaffs.SingleOrDefault(staff => staff.Email.Equals(Email) && staff.Password.Equals(Password));
+                }
+                if (staff != null)
+                {
+                    CurrentAccount = staff;
+                    return true;
+                }
             }
-            if (staff != null)
+            catch (Exception ex)
             {
-                CurrentAccount = staff;
-                return true;
+                throw new Exception(ex.Message);
             }
             return false;
         }
