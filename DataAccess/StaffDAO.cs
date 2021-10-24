@@ -48,7 +48,7 @@ namespace DataAccess
             TblStaff staff = null;
             using (var ctx = new prn211group4Context())
             {
-                staff = ctx.TblStaffs.SingleOrDefault(order => order.StaffId.Equals(staffId));
+                staff = ctx.TblStaffs.SingleOrDefault(staff => staff.StaffId.Equals(staffId));
             }
             return staff;
         }
@@ -76,6 +76,7 @@ namespace DataAccess
         }
 
         // THIS IS UPDATE STAFF
+
         public void Update(TblStaff staff)
         {
             using (var ctx = new prn211group4Context())
@@ -83,6 +84,26 @@ namespace DataAccess
                 ctx.Entry(staff).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 ctx.SaveChanges();
             }
+        }
+
+        // THIS IS GET CURRENT LOGIN ACCOUNT
+
+        private TblStaff CurrentAccount { get; set; }
+        public TblStaff GetCurrentAccount() => CurrentAccount;
+
+        public bool Login(string Email, string Password)
+        {
+            TblStaff staff = null;
+            using (var ctx = new prn211group4Context())
+            {
+                staff = ctx.TblStaffs.SingleOrDefault(staff => staff.Email.Equals(Email) && staff.Password.Equals(Password));
+            }
+            if (staff != null)
+            {
+                CurrentAccount = staff;
+                return true;
+            }
+            return false;
         }
     }
 }

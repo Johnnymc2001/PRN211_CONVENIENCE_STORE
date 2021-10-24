@@ -18,5 +18,9 @@ namespace DataAccess
         public TblStaff GetStaffByID(Guid staffId) => StaffDAO.Instance.GetByID(staffId);
 
         public void Update(TblStaff staff) => StaffDAO.Instance.Update(staff);
+
+        public bool Login(string Email, string Password) => StaffDAO.Instance.Login(Email, Password);
+
+        public TblStaff GetCurrentAccount() => StaffDAO.Instance.GetCurrentAccount();
     }
 }
