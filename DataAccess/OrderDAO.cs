@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    class OrderDAO
+    public class OrderDAO
     {
         // ----------------------------------------------- Singleton Pattern -----------------------------------------------
 
@@ -34,49 +34,111 @@ namespace DataAccess
 
         public List<TblOrder> GetAll()
         {
-            List<TblOrder> orders = new List<TblOrder>();
-            using (var ctx = new prn211group4Context())
+            List<TblOrder> orders = null;
+            try
             {
-                orders = ctx.TblOrders.ToList();
+                using (var ctx = new prn211group4Context())
+                {
+                    orders = ctx.TblOrders.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
             return orders;
         }
 
-        public TblOrder GetUsingID(Guid orderId)
+
+ 
+        public TblOrder GetByID(Guid orderId)
         {
             TblOrder order = null;
-            using (var ctx = new prn211group4Context())
+            try
             {
-                order = ctx.TblOrders.SingleOrDefault(order => order.OrderId.Equals(orderId));
+                using (var ctx = new prn211group4Context())
+                {
+                    order = ctx.TblOrders.SingleOrDefault(order => order.OrderId.Equals(orderId));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
             return order;
         }
 
+        public List<TblOrder> GetByStatus(String statusId)
+        {
+            List<TblOrder> orders = null;
+            try
+            {
+                using (var ctx = new prn211group4Context())
+                {
+                    orders = ctx.TblOrders.Where(order => order.StatusId.Equals(statusId)).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return orders;
+        }
+
         public void Add(TblOrder order)
         {
-            using (var ctx = new prn211group4Context())
+            try
             {
-                ctx.TblOrders.Add(order);
-                ctx.SaveChanges();
+                using (var ctx = new prn211group4Context())
+                {
+                    ctx.TblOrders.Add(order);
+                    ctx.SaveChanges();
+                }
             }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
 
         public void Delete(TblOrder order)
         {
-            using (var ctx = new prn211group4Context())
+            try
             {
-                ctx.TblOrders.Remove(order);
-                ctx.SaveChanges();
+                using (var ctx = new prn211group4Context())
+                {
+                    // Old Delete Method
+                    //ctx.TblOrders.Remove(order);
+                    //ctx.SaveChanges();
+
+                    // Set statusId to DELETED
+                    order.StatusId = "DELETED";
+                    ctx.Entry(order).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    ctx.SaveChanges();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
 
         public void Update(TblOrder order)
         {
-            using (var ctx = new prn211group4Context())
+            try
             {
-                ctx.Entry(order).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                ctx.SaveChanges();
+                using (var ctx = new prn211group4Context())
+                {
+                    ctx.Entry(order).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    ctx.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
     }
