@@ -65,6 +65,26 @@ namespace DataAccess
             return staff;
         }
 
+        // THIS IS GET STAFF BY NAME
+
+        public TblStaff GetByName(string staffName)
+        {
+            TblStaff staff = null;
+            try
+            {
+                using (var ctx = new prn211group4Context())
+                {
+                    staff = ctx.TblStaffs.SingleOrDefault(staff => staff.FullName.Equals(staffName));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return staff;
+        }
+
+
         // THIS IS ADD NEW STAFF
 
         public void Add(TblStaff staff)
