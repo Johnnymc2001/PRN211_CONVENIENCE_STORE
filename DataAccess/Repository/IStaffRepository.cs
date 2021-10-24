@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccess;
-using DataAccess.Models;
+using BusinessObject.Models;
 
 namespace DataAccess
 {

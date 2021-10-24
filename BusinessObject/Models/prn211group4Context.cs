@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace DataAccess.Models
+namespace BusinessObject.Models
 {
     public partial class prn211group4Context : DbContext
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace DataAccess.Models
+namespace BusinessObject.Models
 {
     public partial class TblOrder
     {
