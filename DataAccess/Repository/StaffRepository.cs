@@ -22,5 +22,7 @@ namespace DataAccess
         public bool Login(string Email, string Password) => StaffDAO.Instance.Login(Email, Password);
 
         public TblStaff GetCurrentAccount() => StaffDAO.Instance.GetCurrentAccount();
+
+        public TblStaff GetByName(string staffName) => StaffDAO.Instance.GetByName(staffName);
     }
 }

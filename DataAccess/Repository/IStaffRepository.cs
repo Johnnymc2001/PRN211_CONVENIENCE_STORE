@@ -23,5 +23,7 @@ namespace DataAccess
         bool Login(string Email, string Password);
 
         TblStaff GetCurrentAccount();
+
+        TblStaff GetByName(string staffName);
     }
 }
