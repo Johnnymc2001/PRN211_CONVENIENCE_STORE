@@ -41,9 +41,9 @@ namespace DataAccess
             return staffs;
         }
 
-        // THIS IS GET STAFF WITH ID
+        // THIS IS GET STAFF BY ID
 
-        public TblStaff GetUsingID(Guid staffId)
+        public TblStaff GetByID(Guid staffId)
         {
             TblStaff staff = null;
             using (var ctx = new prn211group4Context())
