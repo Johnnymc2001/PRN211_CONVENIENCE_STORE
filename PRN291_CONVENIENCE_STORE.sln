@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{F6C01106-C754-4E45-92B0-967C1D90D4FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessObject", "BusinessObject\BusinessObject.csproj", "{A90F3E21-440A-4336-8C10-E9E429AF353E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessObject", "BusinessObject\BusinessObject.csproj", "{A90F3E21-440A-4336-8C10-E9E429AF353E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConvenienceStoreApp", "ConvenienceStoreApp\ConvenienceStoreApp.csproj", "{02FE0093-7444-4D3F-AEDC-0FEB1C45FC41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A90F3E21-440A-4336-8C10-E9E429AF353E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A90F3E21-440A-4336-8C10-E9E429AF353E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A90F3E21-440A-4336-8C10-E9E429AF353E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02FE0093-7444-4D3F-AEDC-0FEB1C45FC41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02FE0093-7444-4D3F-AEDC-0FEB1C45FC41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02FE0093-7444-4D3F-AEDC-0FEB1C45FC41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02FE0093-7444-4D3F-AEDC-0FEB1C45FC41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
