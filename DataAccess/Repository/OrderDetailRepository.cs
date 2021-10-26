@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    class OrderDetailRepository : IOrderDetailRepository
+    public class OrderDetailRepository : IOrderDetailRepository
     {
         public List<TblOrderDetail> GetAll() => OrderDetailDAO.Instance.GetAll();
 
