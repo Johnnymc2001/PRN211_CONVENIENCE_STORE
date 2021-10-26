@@ -20,7 +20,7 @@ namespace DataAccess
 
         void Update(TblStaff staff);
 
-        bool Login(string Email, string Password);
+        TblStaff Login(string Email, string Password);
 
         TblStaff GetCurrentAccount();
 

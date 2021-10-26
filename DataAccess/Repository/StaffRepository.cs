@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    class StaffRepository : IStaffRepository
+    public class StaffRepository : IStaffRepository
     {
         public void Add(TblStaff staff) => StaffDAO.Instance.Add(staff);
 
@@ -19,7 +19,7 @@ namespace DataAccess
 
         public void Update(TblStaff staff) => StaffDAO.Instance.Update(staff);
 
-        public bool Login(string Email, string Password) => StaffDAO.Instance.Login(Email, Password);
+        public TblStaff Login(string Email, string Password) => StaffDAO.Instance.Login(Email, Password);
 
         public TblStaff GetCurrentAccount() => StaffDAO.Instance.GetCurrentAccount();
 

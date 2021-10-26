@@ -31,46 +31,132 @@ namespace ConvenienceStoreApp
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnClose = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.label_currentUser = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label_permission = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label_storeName = new System.Windows.Forms.Label();
             this.logo = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.hlightBtn1 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.hlightBtn5 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.hlightBtn4 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.hlightBtn3 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.hlightBtn2 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
-            this.panel2.SuspendLayout();
+            this.hlightBtn1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.hlightBtn5.SuspendLayout();
+            this.hlightBtn4.SuspendLayout();
+            this.hlightBtn3.SuspendLayout();
+            this.hlightBtn2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.button2);
+            this.panel4.Controls.Add(this.btnClose);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(215, 0);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1085, 57);
             this.panel4.TabIndex = 2;
             // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.Color.Red;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnClose.ForeColor = System.Drawing.Color.Black;
+            this.btnClose.Location = new System.Drawing.Point(1040, 12);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(33, 28);
+            this.btnClose.TabIndex = 4;
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.panel5.Controls.Add(this.label_currentUser);
+            this.panel5.Controls.Add(this.label5);
+            this.panel5.Controls.Add(this.label_permission);
+            this.panel5.Controls.Add(this.label3);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(215, 57);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1085, 109);
             this.panel5.TabIndex = 2;
             // 
+            // label_currentUser
+            // 
+            this.label_currentUser.AutoSize = true;
+            this.label_currentUser.Font = new System.Drawing.Font("Century Gothic", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label_currentUser.ForeColor = System.Drawing.Color.White;
+            this.label_currentUser.Location = new System.Drawing.Point(184, 55);
+            this.label_currentUser.Name = "label_currentUser";
+            this.label_currentUser.Size = new System.Drawing.Size(119, 30);
+            this.label_currentUser.TabIndex = 8;
+            this.label_currentUser.Text = "Fullname";
+            this.label_currentUser.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Century Gothic", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(17, 55);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(161, 30);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Current User:";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label_permission
+            // 
+            this.label_permission.AutoSize = true;
+            this.label_permission.Font = new System.Drawing.Font("Century Gothic", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label_permission.ForeColor = System.Drawing.Color.Red;
+            this.label_permission.Location = new System.Drawing.Point(184, 19);
+            this.label_permission.Name = "label_permission";
+            this.label_permission.Size = new System.Drawing.Size(63, 30);
+            this.label_permission.TabIndex = 6;
+            this.label_permission.Text = "Role";
+            this.label_permission.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Century Gothic", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(36, 20);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(142, 30);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Permission:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.CornflowerBlue;
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.label_storeName);
             this.panel3.Controls.Add(this.logo);
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
@@ -89,17 +175,17 @@ namespace ConvenienceStoreApp
             this.label2.Text = "Convenience Store";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label1
+            // label_storeName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(52, 112);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 21);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Akihabara";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_storeName.AutoSize = true;
+            this.label_storeName.Font = new System.Drawing.Font("Century Gothic", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.label_storeName.ForeColor = System.Drawing.Color.White;
+            this.label_storeName.Location = new System.Drawing.Point(52, 112);
+            this.label_storeName.Name = "label_storeName";
+            this.label_storeName.Size = new System.Drawing.Size(94, 21);
+            this.label_storeName.TabIndex = 3;
+            this.label_storeName.Text = "Akihabara";
+            this.label_storeName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // logo
             // 
@@ -122,17 +208,20 @@ namespace ConvenienceStoreApp
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 59);
             this.button1.TabIndex = 3;
-            this.button1.Text = "Order";
+            this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.MouseLeave += new System.EventHandler(this.button1_MouseLeave);
+            this.button1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.button1_MouseMove);
             // 
-            // panel2
+            // hlightBtn1
             // 
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.panel6);
-            this.panel2.Location = new System.Drawing.Point(0, 183);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(14, 59);
-            this.panel2.TabIndex = 3;
+            this.hlightBtn1.BackColor = System.Drawing.Color.White;
+            this.hlightBtn1.Controls.Add(this.panel6);
+            this.hlightBtn1.Location = new System.Drawing.Point(0, 183);
+            this.hlightBtn1.Name = "hlightBtn1";
+            this.hlightBtn1.Size = new System.Drawing.Size(14, 59);
+            this.hlightBtn1.TabIndex = 3;
+            this.hlightBtn1.Visible = false;
             // 
             // panel6
             // 
@@ -145,7 +234,15 @@ namespace ConvenienceStoreApp
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Controls.Add(this.hlightBtn5);
+            this.panel1.Controls.Add(this.btnLogout);
+            this.panel1.Controls.Add(this.hlightBtn4);
+            this.panel1.Controls.Add(this.hlightBtn3);
+            this.panel1.Controls.Add(this.hlightBtn2);
+            this.panel1.Controls.Add(this.button4);
+            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.hlightBtn1);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -154,17 +251,141 @@ namespace ConvenienceStoreApp
             this.panel1.Size = new System.Drawing.Size(215, 720);
             this.panel1.TabIndex = 0;
             // 
+            // hlightBtn5
+            // 
+            this.hlightBtn5.BackColor = System.Drawing.Color.White;
+            this.hlightBtn5.Controls.Add(this.panel8);
+            this.hlightBtn5.Location = new System.Drawing.Point(0, 649);
+            this.hlightBtn5.Name = "hlightBtn5";
+            this.hlightBtn5.Size = new System.Drawing.Size(14, 59);
+            this.hlightBtn5.TabIndex = 8;
+            this.hlightBtn5.Visible = false;
+            // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.Color.White;
+            this.panel8.Location = new System.Drawing.Point(-97, 0);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(21, 59);
+            this.panel8.TabIndex = 4;
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.FlatAppearance.BorderSize = 0;
+            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogout.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnLogout.ForeColor = System.Drawing.Color.White;
+            this.btnLogout.Location = new System.Drawing.Point(15, 649);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(200, 59);
+            this.btnLogout.TabIndex = 8;
+            this.btnLogout.Text = "Log out";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            this.btnLogout.MouseLeave += new System.EventHandler(this.button5_MouseLeave);
+            this.btnLogout.MouseMove += new System.Windows.Forms.MouseEventHandler(this.button5_MouseMove);
+            // 
+            // hlightBtn4
+            // 
+            this.hlightBtn4.BackColor = System.Drawing.Color.White;
+            this.hlightBtn4.Controls.Add(this.panel11);
+            this.hlightBtn4.Location = new System.Drawing.Point(0, 584);
+            this.hlightBtn4.Name = "hlightBtn4";
+            this.hlightBtn4.Size = new System.Drawing.Size(14, 59);
+            this.hlightBtn4.TabIndex = 7;
+            this.hlightBtn4.Visible = false;
+            // 
+            // panel11
+            // 
+            this.panel11.BackColor = System.Drawing.Color.White;
+            this.panel11.Location = new System.Drawing.Point(-97, 0);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(21, 59);
+            this.panel11.TabIndex = 4;
+            // 
+            // hlightBtn3
+            // 
+            this.hlightBtn3.BackColor = System.Drawing.Color.White;
+            this.hlightBtn3.Controls.Add(this.panel9);
+            this.hlightBtn3.Location = new System.Drawing.Point(0, 313);
+            this.hlightBtn3.Name = "hlightBtn3";
+            this.hlightBtn3.Size = new System.Drawing.Size(14, 59);
+            this.hlightBtn3.TabIndex = 6;
+            this.hlightBtn3.Visible = false;
+            // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.Color.White;
+            this.panel9.Location = new System.Drawing.Point(-97, 0);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(21, 59);
+            this.panel9.TabIndex = 4;
+            // 
+            // hlightBtn2
+            // 
+            this.hlightBtn2.BackColor = System.Drawing.Color.White;
+            this.hlightBtn2.Controls.Add(this.panel7);
+            this.hlightBtn2.Location = new System.Drawing.Point(0, 248);
+            this.hlightBtn2.Name = "hlightBtn2";
+            this.hlightBtn2.Size = new System.Drawing.Size(14, 59);
+            this.hlightBtn2.TabIndex = 5;
+            this.hlightBtn2.Visible = false;
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.White;
+            this.panel7.Location = new System.Drawing.Point(-97, 0);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(21, 59);
+            this.panel7.TabIndex = 4;
+            // 
+            // button4
+            // 
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button4.ForeColor = System.Drawing.Color.White;
+            this.button4.Location = new System.Drawing.Point(12, 584);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(200, 59);
+            this.button4.TabIndex = 6;
+            this.button4.Text = "About Us";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.MouseLeave += new System.EventHandler(this.button4_MouseLeave);
+            this.button4.MouseMove += new System.Windows.Forms.MouseEventHandler(this.button4_MouseMove);
+            // 
+            // button3
+            // 
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button3.ForeColor = System.Drawing.Color.White;
+            this.button3.Location = new System.Drawing.Point(12, 313);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(200, 59);
+            this.button3.TabIndex = 5;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Visible = false;
+            this.button3.MouseLeave += new System.EventHandler(this.button3_MouseLeave);
+            this.button3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.button3_MouseMove);
+            // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.Color.Red;
+            this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Location = new System.Drawing.Point(1043, 12);
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(12, 248);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(30, 30);
+            this.button2.Size = new System.Drawing.Size(200, 59);
             this.button2.TabIndex = 4;
-            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
+            this.button2.MouseLeave += new System.EventHandler(this.button2_MouseLeave);
+            this.button2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.button2_MouseMove);
             // 
             // frmMain
             // 
@@ -178,12 +399,19 @@ namespace ConvenienceStoreApp
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmMain";
             this.Text = "Convenience Store Management";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.panel4.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).EndInit();
-            this.panel2.ResumeLayout(false);
+            this.hlightBtn1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.hlightBtn5.ResumeLayout(false);
+            this.hlightBtn4.ResumeLayout(false);
+            this.hlightBtn3.ResumeLayout(false);
+            this.hlightBtn2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -193,13 +421,29 @@ namespace ConvenienceStoreApp
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_storeName;
         private System.Windows.Forms.PictureBox logo;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel hlightBtn1;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Panel hlightBtn2;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel hlightBtn4;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Panel hlightBtn3;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Label label_permission;
+        private System.Windows.Forms.Label label_currentUser;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel hlightBtn5;
+        private System.Windows.Forms.Panel panel8;
     }
 }
 
