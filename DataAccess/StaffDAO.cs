@@ -142,7 +142,7 @@ namespace DataAccess
         private TblStaff CurrentAccount { get; set; }
         public TblStaff GetCurrentAccount() => CurrentAccount;
 
-        public bool Login(string Email, string Password)
+        public TblStaff Login(string Email, string Password)
         {
             try
             {
@@ -154,14 +154,14 @@ namespace DataAccess
                 if (staff != null)
                 {
                     CurrentAccount = staff;
-                    return true;
+                    return CurrentAccount;
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            return false;
+            return null;
         }
     }
 }
