@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using DataAccess;
 using BusinessObject.Models;
 
-namespace DataAccess
+namespace DataAccess.Repository
 {
     public interface IStaffRepository
     {
