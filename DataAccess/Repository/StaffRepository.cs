@@ -15,7 +15,7 @@ namespace DataAccess.Repository
 
         public List<TblStaff> GetAllStaff() => StaffDAO.Instance.GetAll();
 
-        public TblStaff GetStaffByID(Guid staffId) => StaffDAO.Instance.GetByID(staffId);
+        public TblStaff GetStaffByID(string staffId) => StaffDAO.Instance.GetByID(staffId);
 
         public void Update(TblStaff staff) => StaffDAO.Instance.Update(staff);
 

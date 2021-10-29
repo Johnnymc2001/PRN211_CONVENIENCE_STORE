@@ -73,6 +73,7 @@ namespace ConvenienceStoreApp
                     Quantity = o.Quantity,
                     Price = o.Price,
                 }).ToList();
+
             dgvProducts.DataSource = null;
             dgvProducts.DataSource = listObj;
         }
@@ -85,9 +86,21 @@ namespace ConvenienceStoreApp
             UpdateGridViewOrder(orderDetails);
 
         }
+        int? oldIndex = null;
 
         private void UpdateGridViewOrder(List<TblOrderDetail> orderDetails)
         {
+
+
+            try
+            {
+                oldIndex = dgvOrderDetails.CurrentRow.Index;
+            }
+            catch (Exception ex)
+            {
+
+            }
+
             List<DataGridViewOrderDetailObject> listObj = orderDetails
                 .Select(o => new DataGridViewOrderDetailObject()
                 {
@@ -95,8 +108,22 @@ namespace ConvenienceStoreApp
                     ProductName = products.Single(pr => pr.ProductId == o.ProductId).ProductName,
                     Quantity = o.Quantity,
                 }).ToList();
-            dgvOrderDetails.DataSource = null;
+
+            //dgvOrderDetails.DataSource = null;
             dgvOrderDetails.DataSource = listObj;
+            dgvOrderDetails.ClearSelection();
+
+            if (oldIndex != null && oldIndex >= 0)
+            {
+                try
+                {
+                    dgvOrderDetails.CurrentCell = dgvOrderDetails.Rows[(int)oldIndex].Cells[0];
+                }
+                catch (ArgumentOutOfRangeException ex)
+                {
+                    // No Need To Do Anything
+                }
+            }
         }
 
         //-----------------------------------Load and Miscs-----------------------------------------------------------
@@ -140,7 +167,8 @@ namespace ConvenienceStoreApp
                 btnMinus.Enabled = false;
                 btnRemove.Enabled = false;
                 btnCheckout.Enabled = false;
-            } else
+            }
+            else
             {
                 btnPlus.Enabled = true;
                 btnMinus.Enabled = true;
@@ -268,9 +296,39 @@ namespace ConvenienceStoreApp
                 RefreshOrderLocal();
                 ChangeButtonState();
             }
-            
+
         }
 
+        private void TryRemoveOrderDetail()
+        {
+            TblOrderDetail orderDetail = GetCurrentOrderDetail();
+            try
+            {
+                if (null != orderDetail)
+                {
+                    TblProduct product = products.SingleOrDefault(p => p.ProductId.Equals(orderDetail.ProductId));
+                    int? newQuantity = orderDetail.Quantity - 1;
+                    if (newQuantity == 0)
+                    {
+                        orderDetails.Remove(orderDetail);
+                        rtbAction.Text = $"Removed {product.ProductName}";
+                        RefreshOrderLocal();
+                    }
+                    else
+                    {
+                        orderDetail.Quantity = newQuantity;
+                        orderDetail.TotalPrice = product.Price * newQuantity;
+                        rtbAction.Text = $"Removed 1 {product.ProductName}";
+                        RefreshOrderLocal();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Order - Remove 1 Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            ChangeButtonState();
+        }
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             RefreshProductDatabase();
@@ -344,40 +402,14 @@ namespace ConvenienceStoreApp
 
         private void btnMinus_Click(object sender, EventArgs e)
         {
-            TblOrderDetail orderDetail = GetCurrentOrderDetail();
-            try
-            {
-                if (null != orderDetail)
-                {
-                    TblProduct product = products.SingleOrDefault(p => p.ProductId.Equals(orderDetail.ProductId));
-                    int? newQuantity = orderDetail.Quantity - 1;
-                    if (newQuantity == 0)
-                    {
-                        orderDetails.Remove(orderDetail);
-                        rtbAction.Text = $"Removed {product.ProductName}";
-                        RefreshOrderLocal();
-                    }
-                    else
-                    {
-                        orderDetail.Quantity = newQuantity;
-                        orderDetail.TotalPrice = product.Price * newQuantity;
-                        rtbAction.Text = $"Removed 1 {product.ProductName}";
-                        RefreshOrderLocal();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}", "Order - Add 1 Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            ChangeButtonState();
+            TryRemoveOrderDetail();
         }
 
         private void btnCheckout_Click(object sender, EventArgs e)
         {
             if (orderDetails.Count > 0)
             {
-                
+
                 TblOrder checkoutOrder = new()
                 {
                     OrderId = orderId,
@@ -385,7 +417,7 @@ namespace ConvenienceStoreApp
                     CustomerName = txtCustomerName.Text,
                     Date = DateTime.Now,
                     OrderPrice = CalculateTotal(),
-                    StatusId = "CHECKED_OUT",
+                    StatusId = "CheckedOut",
                 };
 
                 orderRepository.Add(checkoutOrder);
@@ -396,7 +428,7 @@ namespace ConvenienceStoreApp
                 foreach (TblOrderDetail od in orderDetails)
                 {
                     orderDetailRepository.Add(od);
-              
+
                     // Get Product out and ready to update
                     TblProduct product = products.Single(p => p.ProductId == od.ProductId);
                     product.Quantity -= od.Quantity;
@@ -426,6 +458,11 @@ namespace ConvenienceStoreApp
         private void dgvProducts_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             TryAddProduct();
+        }
+
+        private void dgvOrderDetails_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            TryRemoveOrderDetail();
         }
     }
 }
