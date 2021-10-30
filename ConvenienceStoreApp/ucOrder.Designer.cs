@@ -54,16 +54,24 @@ namespace ConvenienceStoreApp
             // 
             // dgvOrderDetails
             // 
+            this.dgvOrderDetails.AllowUserToAddRows = false;
+            this.dgvOrderDetails.AllowUserToDeleteRows = false;
+            this.dgvOrderDetails.AllowUserToResizeColumns = false;
+            this.dgvOrderDetails.AllowUserToResizeRows = false;
             this.dgvOrderDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOrderDetails.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvOrderDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOrderDetails.Location = new System.Drawing.Point(744, 34);
+            this.dgvOrderDetails.MultiSelect = false;
             this.dgvOrderDetails.Name = "dgvOrderDetails";
             this.dgvOrderDetails.ReadOnly = true;
+            this.dgvOrderDetails.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvOrderDetails.RowHeadersVisible = false;
             this.dgvOrderDetails.RowTemplate.Height = 25;
             this.dgvOrderDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvOrderDetails.Size = new System.Drawing.Size(338, 351);
             this.dgvOrderDetails.TabIndex = 0;
+            this.dgvOrderDetails.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrderDetails_CellContentDoubleClick);
             // 
             // btnAdd
             // 
@@ -203,6 +211,8 @@ namespace ConvenienceStoreApp
             this.dgvProducts.Location = new System.Drawing.Point(4, 113);
             this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.ReadOnly = true;
+            this.dgvProducts.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvProducts.RowHeadersVisible = false;
             this.dgvProducts.RowTemplate.Height = 25;
             this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProducts.Size = new System.Drawing.Size(734, 381);
@@ -240,8 +250,9 @@ namespace ConvenienceStoreApp
             // 
             // rtbAction
             // 
-            this.rtbAction.Font = new System.Drawing.Font("SimSun-ExtB", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.rtbAction.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.rtbAction.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.rtbAction.Font = new System.Drawing.Font("BIZ UDPGothic", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.rtbAction.ForeColor = System.Drawing.Color.SpringGreen;
             this.rtbAction.Location = new System.Drawing.Point(126, 10);
             this.rtbAction.Name = "rtbAction";
             this.rtbAction.ReadOnly = true;
@@ -269,6 +280,7 @@ namespace ConvenienceStoreApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtCustomerName);
             this.Controls.Add(this.rtbAction);

@@ -49,7 +49,7 @@ namespace DataAccess
 
         // THIS IS GET STAFF BY ID
 
-        public TblStaff GetByID(Guid staffId)
+        public TblStaff GetByID(string staffId)
         {
             TblStaff staff = null;
             try

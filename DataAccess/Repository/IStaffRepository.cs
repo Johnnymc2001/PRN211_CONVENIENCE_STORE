@@ -12,7 +12,7 @@ namespace DataAccess.Repository
     {
         List<TblStaff> GetAllStaff();
 
-        TblStaff GetStaffByID(Guid staffId);
+        TblStaff GetStaffByID(string staffId);
 
         void Add(TblStaff staff);
 
