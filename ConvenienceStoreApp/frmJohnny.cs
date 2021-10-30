@@ -16,5 +16,10 @@ namespace ConvenienceStoreApp
         {
             InitializeComponent();
         }
+
+        private void frmJohnny_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
