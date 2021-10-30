@@ -184,7 +184,7 @@ namespace ConvenienceStoreApp
                 GenerateNewOrder();
                 ChangeButtonState();
                 // Get ME :D
-                loggedStaff = staffRepository.GetStaffByID(Guid.Parse("cfec1bf2-1f3a-45dc-9473-478d5fb13006"));
+                loggedStaff = staffRepository.GetStaffByID("cfec1bf2-1f3a-45dc-9473-478d5fb13006");
             }
         }
 
@@ -413,7 +413,7 @@ namespace ConvenienceStoreApp
                 TblOrder checkoutOrder = new()
                 {
                     OrderId = orderId,
-                    //StaffId = loggedStaff.StaffId,
+                    StaffId = loggedStaff.StaffId,
                     CustomerName = txtCustomerName.Text,
                     Date = DateTime.Now,
                     OrderPrice = CalculateTotal(),
