@@ -59,6 +59,7 @@ namespace ConvenienceStoreApp
             // 
             // txtOrderID
             // 
+            this.txtOrderID.Enabled = false;
             this.txtOrderID.Location = new System.Drawing.Point(135, 21);
             this.txtOrderID.Name = "txtOrderID";
             this.txtOrderID.Size = new System.Drawing.Size(207, 23);
@@ -123,6 +124,7 @@ namespace ConvenienceStoreApp
             // 
             // txtOrderDate
             // 
+            this.txtOrderDate.Enabled = false;
             this.txtOrderDate.Location = new System.Drawing.Point(135, 160);
             this.txtOrderDate.Name = "txtOrderDate";
             this.txtOrderDate.Size = new System.Drawing.Size(207, 23);
@@ -130,6 +132,7 @@ namespace ConvenienceStoreApp
             // 
             // txtStaffID
             // 
+            this.txtStaffID.Enabled = false;
             this.txtStaffID.Location = new System.Drawing.Point(135, 113);
             this.txtStaffID.Name = "txtStaffID";
             this.txtStaffID.Size = new System.Drawing.Size(207, 23);
@@ -137,6 +140,7 @@ namespace ConvenienceStoreApp
             // 
             // txtStatus
             // 
+            this.txtStatus.Enabled = false;
             this.txtStatus.Location = new System.Drawing.Point(135, 67);
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.Size = new System.Drawing.Size(207, 23);
@@ -154,6 +158,7 @@ namespace ConvenienceStoreApp
             // 
             // txtPrice
             // 
+            this.txtPrice.Enabled = false;
             this.txtPrice.Location = new System.Drawing.Point(135, 208);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(207, 23);
@@ -161,6 +166,7 @@ namespace ConvenienceStoreApp
             // 
             // txtPayment
             // 
+            this.txtPayment.Enabled = false;
             this.txtPayment.Location = new System.Drawing.Point(135, 255);
             this.txtPayment.Name = "txtPayment";
             this.txtPayment.Size = new System.Drawing.Size(207, 23);

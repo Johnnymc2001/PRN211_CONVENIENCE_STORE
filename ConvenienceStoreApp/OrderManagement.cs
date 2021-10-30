@@ -38,12 +38,12 @@ namespace ConvenienceStoreApp
                 List<object> viewOrderList = new List<object>();
                 listOrder.ForEach(order => viewOrderList.Add(new
                 {
-                    OrderID = order.OrderId,
-                    StaffID = order.StaffId,
+                    OrderId = order.OrderId,
+                    StaffId = order.StaffId,
                     CustomerName = order.CustomerName,
-                    OrderDate = order.Date,
-                    Price = order.OrderPrice,
-                    StatusID = order.StaffId,
+                    Date = order.Date,
+                    OrderPrice = order.OrderPrice,
+                    StatusId = order.StatusId,
                     PaymentMethod = order.PaymentMethod,
                 }));
 
@@ -56,10 +56,10 @@ namespace ConvenienceStoreApp
                 txtPrice.DataBindings.Clear();
                 txtStatus.DataBindings.Clear();
 
-                txtStaffID.DataBindings.Add("Text", source, "StaffID");
-                txtOrderDate.DataBindings.Add("Text", source, "OrderDate");
-                txtPrice.DataBindings.Add("Text", source, "Price");
-                txtStatus.DataBindings.Add("Text", source, "StatusID");
+                txtStaffID.DataBindings.Add("Text", source, "StaffId");
+                txtOrderDate.DataBindings.Add("Text", source, "Date");
+                txtPrice.DataBindings.Add("Text", source, "OrderPrice");
+                txtStatus.DataBindings.Add("Text", source, "StatusId");
 
                 dgvOrders.DataSource = null;
                 dgvOrders.DataSource = source;
@@ -78,18 +78,17 @@ namespace ConvenienceStoreApp
                 List<object> viewOrderList = new List<object>();
                 listOrder.ForEach(order => viewOrderList.Add(new
                 {
-                    OrderID = order.OrderId,
-                    StaffID = order.StaffId,
+                    OrderId = order.OrderId,
+                    StaffId = order.StaffId,
                     CustomerName = order.CustomerName,
-                    OrderDate = order.Date,
-                    Price = order.OrderPrice,
-                    StatusID = order.StatusId,
+                    Date = order.Date,
+                    OrderPrice = order.OrderPrice,
+                    StatusId = order.StatusId,
                     PaymentMethod = order.PaymentMethod,
                 }));
 
                 source = new BindingSource();
                 source.DataSource = viewOrderList;
-
 
                 dgvOrders.DataSource = null;
                 dgvOrders.DataSource = source;
@@ -167,9 +166,10 @@ namespace ConvenienceStoreApp
 
         private void btnViewDetail_Click(object sender, EventArgs e)
         {
+            Guid orderID = Guid.Parse(dgvOrders.CurrentRow.Cells[0].Value.ToString());
             OrderInfo orderInfo = new OrderInfo()
             {
-                OrderInformation = (TblOrder)dgvOrders.CurrentRow.DataBoundItem
+                OrderInformation = OrderRepository.GetByID(orderID)
             };
 
             orderInfo.Show();

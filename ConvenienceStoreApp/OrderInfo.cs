@@ -39,9 +39,17 @@ namespace ConvenienceStoreApp
             try
             {
                 listOrderDetail = OrderDetailRepository.GetListByID(OrderInformation.OrderId);
+                List<object> viewOrderList = new List<object>();
+                listOrderDetail.ForEach(orderDetail => viewOrderList.Add(new
+                {
+                    OrderID = orderDetail.OrderId,
+                    ProductID = orderDetail.ProductId,
+                    Quantity = orderDetail.Quantity,
+                    TotalPrice = orderDetail.TotalPrice
+                }));
 
                 source = new BindingSource();
-                source.DataSource = listOrderDetail;
+                source.DataSource = viewOrderList;
 
                 dgvDetails.DataSource = null;
                 dgvDetails.DataSource = source;
