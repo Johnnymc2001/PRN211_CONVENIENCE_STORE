@@ -22,7 +22,12 @@ namespace DataAccess.Repository
         /// <summary>
         ///    Return a list of Orders using Status
         /// </summary>
-        List<TblOrder> GetByStatus(String status);
+        List<TblOrder> GetByStatus(string status);
+
+        /// <summary>
+        ///    Return a list of Orders using Staff
+        /// </summary>
+        List<TblOrder> GetByStaff(string staffID);
 
         /// <summary>
         ///    Add an Order

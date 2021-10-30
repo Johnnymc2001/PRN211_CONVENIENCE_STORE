@@ -57,6 +57,7 @@ namespace ConvenienceStoreApp
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.orderManagement1 = new ConvenienceStoreApp.OrderManagement();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -387,12 +388,20 @@ namespace ConvenienceStoreApp
             this.button2.MouseLeave += new System.EventHandler(this.button2_MouseLeave);
             this.button2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.button2_MouseMove);
             // 
+            // orderManagement1
+            // 
+            this.orderManagement1.Location = new System.Drawing.Point(215, 166);
+            this.orderManagement1.Name = "orderManagement1";
+            this.orderManagement1.Size = new System.Drawing.Size(1085, 554);
+            this.orderManagement1.TabIndex = 9;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.ClientSize = new System.Drawing.Size(1300, 720);
+            this.Controls.Add(this.orderManagement1);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel1);
@@ -444,6 +453,7 @@ namespace ConvenienceStoreApp
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel hlightBtn5;
         private System.Windows.Forms.Panel panel8;
+        private OrderManagement orderManagement1;
     }
 }
 
