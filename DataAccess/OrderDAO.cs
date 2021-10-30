@@ -92,7 +92,7 @@ namespace DataAccess
             {
                 using (var ctx = new prn211group4Context())
                 {
-                    orders = ctx.TblOrders.Where(order => order.StaffId.Equals(staffID)).ToList();
+                    orders = ctx.TblOrders.Where(order => order.StaffId.Contains(staffID)).ToList<TblOrder>();
                 }
             }
             catch (Exception ex)

@@ -17,7 +17,7 @@ namespace ConvenienceStoreApp
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmJohnny());
+            Application.Run(new frmMain());
         }
     }
 }
