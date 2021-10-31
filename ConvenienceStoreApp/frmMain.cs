@@ -30,46 +30,46 @@ namespace ConvenienceStoreApp
         {
             LoadOtherUI();
             LoadButtonUI();
+            HideUC();
         }
 
         // Admin function1:
         private void button1_ADfunc1_Click(object sender, EventArgs e)
         {
             HlightBtn(1);
-            HideUC();
-            ucOrder1.Show();
+            orderManagement1.Show();
         }
 
         //Staff function1:
         private void button1_STfunc1_Click(object sender, EventArgs e)
         {
             HlightBtn(1);
-            HideUC();
+            ucOrder1.Show();
         }
 
         private void button2_ADfunc2_Click(object sender, EventArgs e)
         {
             HlightBtn(2);
-            HideUC();
-            ucBill1.Show();
+            ucStaffManagement1.Show();
         }
 
         private void button2_STfunc2_Click(object sender, EventArgs e)
         {
             HlightBtn(2);
-            HideUC();
+            ucSelfOrdersView1.Show();
         }
 
         private void button3_ADfunc3_Click(object sender, EventArgs e)
         {
             HlightBtn(3);
-            HideUC();
+            ucProductManagement1.Show();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            HlightBtn(4);
             HideUC();
+            HlightBtn(4);
+            
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -100,8 +100,11 @@ namespace ConvenienceStoreApp
         }
         private void HideUC()
         {
+            ucStaffManagement1.Hide();
+            ucSelfOrdersView1.Hide();
+            ucProductManagement1.Hide();
+            orderManagement1.Hide();
             ucOrder1.Hide();
-            ucBill1.Hide();
         }
 
 
@@ -110,21 +113,21 @@ namespace ConvenienceStoreApp
             if (CurrentAccount.RoleId.Trim().Equals("AD"))
             {
                 button1.Click += button1_ADfunc1_Click;
-            button2.Click += button2_ADfunc2_Click;
-            button3.Click += button3_ADfunc3_Click;
-            button1.Text = "Orders History";
-            button2.Text = "Staff Management";
-            button3.Text = "Product Management";
-            button1.Visible = true;
-            button2.Visible = true;
-            button3.Visible = true;
+                button2.Click += button2_ADfunc2_Click;
+                button3.Click += button3_ADfunc3_Click;
+                button1.Text = "Orders History";
+                button2.Text = "Staff Management";
+                button3.Text = "Product Management";
+                button1.Visible = true;
+                button2.Visible = true;
+                button3.Visible = true;
             }
             if ("ST".Equals(CurrentAccount.RoleId))
             {
                 button1.Click += button1_STfunc1_Click;
                 button2.Click += button2_STfunc2_Click;
                 button1.Text = "Order";
-                button2.Text = "Orders History";
+                button2.Text = "Self Orders History";
                 button1.Visible = true;
                 button2.Visible = true;
             }
@@ -139,47 +142,54 @@ namespace ConvenienceStoreApp
             else
             {
                 clickedBtn = i;
-            switch (i)
-            {
-                case 1:
-                    hlightBtn1.Visible = true;
-                    hlightBtn2.Visible = false;
-                    hlightBtn3.Visible = false;
-                    hlightBtn4.Visible = false;
-                    hlightBtn5.Visible = false;
-                    break;
-                case 2:
-                    hlightBtn1.Visible = false;
-                    hlightBtn2.Visible = true;
-                    hlightBtn3.Visible = false;
-                    hlightBtn4.Visible = false;
-                    hlightBtn5.Visible = false;
-
-                    ucOrder1.Hide();
-                    ucBill1.Show();
-                    break;
-                case 3:
-                    hlightBtn1.Visible = false;
-                    hlightBtn2.Visible = false;
-                    hlightBtn3.Visible = true;
-                    hlightBtn4.Visible = false;
-                    hlightBtn5.Visible = false;
-                    break;
-                case 4:
-                    hlightBtn1.Visible = false;
-                    hlightBtn2.Visible = false;
-                    hlightBtn3.Visible = false;
-                    hlightBtn4.Visible = true;
-                    hlightBtn5.Visible = false;
-                    break;
-                case 5:
-                    hlightBtn1.Visible = false;
-                    hlightBtn2.Visible = false;
-                    hlightBtn3.Visible = false;
-                    hlightBtn4.Visible = false;
-                    hlightBtn5.Visible = true;
-                    break;
-            }
+                switch (i)
+                {
+                    case 1:
+                        hlightBtn1.Visible = true;
+                        hlightBtn2.Visible = false;
+                        hlightBtn3.Visible = false;
+                        hlightBtn4.Visible = false;
+                        hlightBtn5.Visible = false;
+                        HideUC();
+                        
+                        break;
+                    case 2:
+                        hlightBtn1.Visible = false;
+                        hlightBtn2.Visible = true;
+                        hlightBtn3.Visible = false;
+                        hlightBtn4.Visible = false;
+                        hlightBtn5.Visible = false;
+                        HideUC();
+                        
+                        break;
+                    case 3:
+                        hlightBtn1.Visible = false;
+                        hlightBtn2.Visible = false;
+                        hlightBtn3.Visible = true;
+                        hlightBtn4.Visible = false;
+                        hlightBtn5.Visible = false;
+                        HideUC();
+                        
+                        break;
+                    case 4:
+                        hlightBtn1.Visible = false;
+                        hlightBtn2.Visible = false;
+                        hlightBtn3.Visible = false;
+                        hlightBtn4.Visible = true;
+                        hlightBtn5.Visible = false;
+                        HideUC();
+                        
+                        break;
+                    case 5:
+                        hlightBtn1.Visible = false;
+                        hlightBtn2.Visible = false;
+                        hlightBtn3.Visible = false;
+                        hlightBtn4.Visible = false;
+                        hlightBtn5.Visible = true;
+                        HideUC();
+                        
+                        break;
+                }
             }
         }
 

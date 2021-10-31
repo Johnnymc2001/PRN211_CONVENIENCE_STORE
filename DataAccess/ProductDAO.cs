@@ -53,7 +53,7 @@ namespace DataAccess
                 using (var ctx = new prn211group4Context())
                 {
                     listProduct = ctx.TblProducts.ToList();
-                    listProduct = listProduct.Where(product => product.StatusId.Equals("Available")).ToList<TblProduct>();
+                    listProduct = listProduct.Where(product => product.StatusId.Trim().Equals("Available")).ToList<TblProduct>();
                 }
             }
             catch (Exception ex)

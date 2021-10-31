@@ -58,6 +58,10 @@ namespace ConvenienceStoreApp
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.orderManagement1 = new ConvenienceStoreApp.OrderManagement();
+            this.ucOrder1 = new ConvenienceStoreApp.ucOrder();
+            this.ucProductManagement1 = new ConvenienceStoreApp.ucProductManagement();
+            this.ucSelfOrdersView1 = new ConvenienceStoreApp.ucSelfOrdersView();
+            this.ucStaffManagement1 = new ConvenienceStoreApp.ucStaffManagement();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -395,12 +399,50 @@ namespace ConvenienceStoreApp
             this.orderManagement1.Size = new System.Drawing.Size(1085, 554);
             this.orderManagement1.TabIndex = 9;
             // 
+            // ucOrder1
+            // 
+            this.ucOrder1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ucOrder1.Location = new System.Drawing.Point(215, 166);
+            this.ucOrder1.loggedStaff = null;
+            this.ucOrder1.Name = "ucOrder1";
+            this.ucOrder1.Size = new System.Drawing.Size(1085, 554);
+            this.ucOrder1.TabIndex = 9;
+            // 
+            // ucProductManagement1
+            // 
+            this.ucProductManagement1.Location = new System.Drawing.Point(214, 166);
+            this.ucProductManagement1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ucProductManagement1.Name = "ucProductManagement1";
+            this.ucProductManagement1.Size = new System.Drawing.Size(1085, 554);
+            this.ucProductManagement1.TabIndex = 10;
+            // 
+            // ucSelfOrdersView1
+            // 
+            this.ucSelfOrdersView1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ucSelfOrdersView1.Location = new System.Drawing.Point(214, 166);
+            this.ucSelfOrdersView1.loggedStaff = null;
+            this.ucSelfOrdersView1.Name = "ucSelfOrdersView1";
+            this.ucSelfOrdersView1.Size = new System.Drawing.Size(1085, 554);
+            this.ucSelfOrdersView1.TabIndex = 11;
+            // 
+            // ucStaffManagement1
+            // 
+            this.ucStaffManagement1.Location = new System.Drawing.Point(214, 165);
+            this.ucStaffManagement1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ucStaffManagement1.Name = "ucStaffManagement1";
+            this.ucStaffManagement1.Size = new System.Drawing.Size(1085, 554);
+            this.ucStaffManagement1.TabIndex = 12;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.ClientSize = new System.Drawing.Size(1300, 720);
+            this.Controls.Add(this.ucStaffManagement1);
+            this.Controls.Add(this.ucSelfOrdersView1);
+            this.Controls.Add(this.ucProductManagement1);
+            this.Controls.Add(this.ucOrder1);
             this.Controls.Add(this.orderManagement1);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
@@ -454,6 +496,10 @@ namespace ConvenienceStoreApp
         private System.Windows.Forms.Panel hlightBtn5;
         private System.Windows.Forms.Panel panel8;
         private OrderManagement orderManagement1;
+        private ucOrder ucOrder1;
+        private ucProductManagement ucProductManagement1;
+        private ucSelfOrdersView ucSelfOrdersView1;
+        private ucStaffManagement ucStaffManagement1;
     }
 }
 
