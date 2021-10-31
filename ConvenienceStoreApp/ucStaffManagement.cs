@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DataAccess;
 using DataAccess.Repository;
 using BusinessObject.Models;
+using System.Text.RegularExpressions;
 
 namespace ConvenienceStoreApp
 {
@@ -33,8 +34,8 @@ namespace ConvenienceStoreApp
                 txtAddress.ReadOnly = true;
                 txtPhoneNumber.ReadOnly = true;
                 txtPassword.ReadOnly = true;
-                txtRoleID.ReadOnly = true;
-                txtStatusID.ReadOnly = true;
+                cboRoleID.Enabled = false;
+                cboStatusID.Enabled = false;
                 txtEmail.ReadOnly = true;
             }
         }
@@ -54,8 +55,8 @@ namespace ConvenienceStoreApp
                 txtAddress.DataBindings.Clear();
                 txtPhoneNumber.DataBindings.Clear();
                 txtPassword.DataBindings.Clear();
-                txtRoleID.DataBindings.Clear();
-                txtStatusID.DataBindings.Clear();
+                cboRoleID.DataBindings.Clear();
+                cboStatusID.DataBindings.Clear();
                 txtEmail.DataBindings.Clear();
 
                 txtStaffID.DataBindings.Add("Text", source, "StaffId");
@@ -63,8 +64,8 @@ namespace ConvenienceStoreApp
                 txtAddress.DataBindings.Add("Text", source, "Address");
                 txtPhoneNumber.DataBindings.Add("Text", source, "PhoneNumber");
                 txtPassword.DataBindings.Add("Text", source, "Password");
-                txtRoleID.DataBindings.Add("Text", source, "RoleId");
-                txtStatusID.DataBindings.Add("Text", source, "StatusId");
+                cboRoleID.DataBindings.Add("Text", source, "RoleId");
+                cboStatusID.DataBindings.Add("Text", source, "StatusId");
                 txtEmail.DataBindings.Add("Text", source, "Email");
 
                 dgvStaffList.DataSource = null;
@@ -79,20 +80,70 @@ namespace ConvenienceStoreApp
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            string id = txtSearchStaffID.Text;
+            string name = txtSearchStaffName.Text;
+            TblStaff staff = null;
+            List<TblStaff> staffs = new List<TblStaff>(); 
             try
             {
-                TblStaff staff = repoStaff.SearchByIdAndName(txtSearchStaffID.Text, txtSearchStaffName.Text);
-                if(staff != null)
+                if (!id.Trim().Equals("") && !name.Trim().Equals(""))
                 {
-                    source = new BindingSource();
-                    source.DataSource = staff;
+                    staffs = repoStaff.SearchByIdAndName(id, name);
+                    if (staffs.Count > 0)
+                    {
+                        source = new BindingSource();
+                        source.DataSource = staffs;
+                        dgvStaffList.DataSource = null;
+                        dgvStaffList.DataSource = source;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Not found", "Search", MessageBoxButtons.OK);
+                        txtSearchStaffID.Clear();
+                        txtSearchStaffName.Clear();
+                        LoadStaffList();
+                    }
+                }
+                else if (!id.Trim().Equals("") || !name.Trim().Equals(""))
+                {
+                    if (!name.Trim().Equals(""))
+                    {
+                        staffs = repoStaff.SearchByName(name);
+                    }
+                    else
+                    {
+                        staff = repoStaff.GetStaffByID(id);
+                    }
 
-                    dgvStaffList.DataSource = null;
-                    dgvStaffList.DataSource = source;
+                    if (staffs.Count == 0 && staff == null)
+                    {
+                        MessageBox.Show("Not found", "Search", MessageBoxButtons.OK);
+                        txtSearchStaffID.Clear();
+                        txtSearchStaffName.Clear();
+                        LoadStaffList();
+                    }
+                    else
+                    {
+                        if(staff != null)
+                        {
+                            source = new BindingSource();
+                            source.DataSource = staff;
+                            dgvStaffList.DataSource = null;
+                            dgvStaffList.DataSource = source;
+                        }
+                        else if(staffs.Count > 0)
+                        {
+                            source = new BindingSource();
+                            source.DataSource = staffs;
+                            dgvStaffList.DataSource = null;
+                            dgvStaffList.DataSource = source;
+                        }
+                       
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Staff not found", "Search Staff", MessageBoxButtons.OK);
+                    MessageBox.Show("Empty search input", "Search", MessageBoxButtons.OK);
                 }
             }
             catch (Exception ex)
@@ -105,12 +156,17 @@ namespace ConvenienceStoreApp
         {
             txtSearchStaffID.Clear();
             txtSearchStaffName.Clear();
+            LoadStaffList();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (btnAdd.Text == "Add")
             {
+                btnRefresh.Enabled = false;
+                btnSearch.Enabled = false;
+                txtSearchStaffID.ReadOnly = true;
+                txtSearchStaffName.ReadOnly = true;
 
                 dgvStaffList.ClearSelection();
                 dgvStaffList.CurrentCell = null;
@@ -120,8 +176,6 @@ namespace ConvenienceStoreApp
                 txtAddress.Clear();
                 txtPhoneNumber.Clear();
                 txtPassword.Clear();
-                txtRoleID.Clear();
-                txtStatusID.Clear();
                 txtEmail.Clear();
 
                 txtStaffID.DataBindings.Clear();
@@ -129,8 +183,8 @@ namespace ConvenienceStoreApp
                 txtAddress.DataBindings.Clear();
                 txtPhoneNumber.DataBindings.Clear();
                 txtPassword.DataBindings.Clear();
-                txtRoleID.DataBindings.Clear();
-                txtStatusID.DataBindings.Clear();
+                cboRoleID.DataBindings.Clear();
+                cboStatusID.DataBindings.Clear();
                 txtEmail.DataBindings.Clear();
 
                 txtStaffID.Enabled = true;
@@ -139,8 +193,8 @@ namespace ConvenienceStoreApp
                 txtAddress.ReadOnly = false;
                 txtPhoneNumber.ReadOnly = false;
                 txtPassword.ReadOnly = false;
-                txtRoleID.ReadOnly = false;
-                txtStatusID.ReadOnly = false;
+                cboRoleID.Enabled = true;
+                cboStatusID.Enabled = false;
                 txtEmail.ReadOnly = false;
 
                 dgvStaffList.Enabled = false;
@@ -150,47 +204,80 @@ namespace ConvenienceStoreApp
             }
             else if(btnAdd.Text == "Save")
             {
-                try
+                if (txtStaffID.Text.Trim().Equals("") || txtFullname.Text.Trim().Equals("") || txtAddress.Text.Trim().Equals("") || txtPhoneNumber.Text.Trim().Equals("") || txtPassword.Text.Trim().Equals("") || txtEmail.Text.Trim().Equals(""))
                 {
-                    TblStaff staff = new TblStaff
-                    {
-                        StaffId = txtStaffID.Text,
-                        FullName = txtFullname.Text,
-                        Address = txtAddress.Text,
-                        PhoneNumber = txtPhoneNumber.Text,
-                        Password = txtPassword.Text,
-                        RoleId = txtRoleID.Text,
-                        StatusId = txtStatusID.Text,
-                        Email = txtEmail.Text,
-                    };
+                    MessageBox.Show("Blank input are not allow", "Input error", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    int parseValue;
+                    Regex emailRegex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+                    Match match = emailRegex.Match(txtEmail.Text.Trim());
 
-                    if (txtStaffID.Enabled)
+                    if (!Regex.IsMatch(txtFullname.Text.Trim(), @"^[a-zA-Z ]+$"))
                     {
-                        repoStaff.Add(staff);
+                        MessageBox.Show("Invalid name input", "Input error", MessageBoxButtons.OK);
+                    } else if (!int.TryParse(txtPhoneNumber.Text.Trim(), out parseValue) || txtPhoneNumber.Text.Trim().Length != 10)
+                    {
+                        MessageBox.Show("Invalid phone number input", "Input error", MessageBoxButtons.OK);
+                    } else if (txtPassword.Text.Length < 6)
+                    {
+                        MessageBox.Show("Password too weak. Please enter more than 6 character !", "Input error", MessageBoxButtons.OK);
+                    } else if (!match.Success)
+                    {
+                        MessageBox.Show("Invalid email", "Input error", MessageBoxButtons.OK);
                     }
                     else
                     {
-                        repoStaff.Update(staff);
+                        try
+                        {
+                            TblStaff staff = new TblStaff
+                            {
+                                StaffId = txtStaffID.Text,
+                                FullName = txtFullname.Text,
+                                Address = txtAddress.Text,
+                                PhoneNumber = txtPhoneNumber.Text,
+                                Password = txtPassword.Text,
+                                RoleId = cboRoleID.SelectedItem.ToString(),
+                                StatusId = cboStatusID.SelectedItem.ToString(),
+                                Email = txtEmail.Text,
+                            };
+
+                            if (txtStaffID.Enabled)
+                            {
+                                repoStaff.Add(staff);
+                            }
+                            else
+                            {
+                                repoStaff.Update(staff);
+                            }
+
+                            btnAdd.Text = "Add";
+                            btnUpdate.Text = "Update";
+
+                            txtStaffID.ReadOnly = true;
+                            txtFullname.ReadOnly = true;
+                            txtAddress.ReadOnly = true;
+                            txtPhoneNumber.ReadOnly = true;
+                            txtPassword.ReadOnly = true;
+                            cboRoleID.Enabled = false;
+                            cboStatusID.Enabled = false;
+                            txtEmail.ReadOnly = true;
+
+                            dgvStaffList.Enabled = true;
+
+                            btnRefresh.Enabled = true;
+                            btnSearch.Enabled = true;
+                            txtSearchStaffID.ReadOnly = false;
+                            txtSearchStaffName.ReadOnly = false;
+
+                            LoadStaffList();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Add new staff", MessageBoxButtons.OK);
+                        }
                     }
-
-                    btnAdd.Text = "Add";
-                    btnUpdate.Text = "Update";
-
-                    txtStaffID.ReadOnly = true;
-                    txtFullname.ReadOnly = true;
-                    txtAddress.ReadOnly = true;
-                    txtPhoneNumber.ReadOnly = true;
-                    txtPassword.ReadOnly = true;
-                    txtRoleID.ReadOnly = true;
-                    txtStatusID.ReadOnly = true;
-                    txtEmail.ReadOnly = true;
-
-                    dgvStaffList.Enabled = true;
-
-                    LoadStaffList();
-                } catch(Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Add new staff", MessageBoxButtons.OK);
                 }
             }
         }
@@ -199,13 +286,18 @@ namespace ConvenienceStoreApp
         {
             if(btnUpdate.Text == "Update")
             {
+                btnRefresh.Enabled = false;
+                btnSearch.Enabled = false;
+                txtSearchStaffID.ReadOnly = true;
+                txtSearchStaffName.ReadOnly = true;
+
                 txtStaffID.Enabled = false;
                 txtFullname.ReadOnly = false;
                 txtAddress.ReadOnly = false;
                 txtPhoneNumber.ReadOnly = false;
                 txtPassword.ReadOnly = false;
-                txtRoleID.ReadOnly = false;
-                txtStatusID.ReadOnly = false;
+                cboRoleID.Enabled = true;
+                cboStatusID.Enabled = true;
                 txtEmail.ReadOnly = false;
 
                 btnAdd.Text = "Save";
@@ -213,14 +305,19 @@ namespace ConvenienceStoreApp
             }
             else if(btnUpdate.Text == "Cancel")
             {
+                btnRefresh.Enabled = true;
+                btnSearch.Enabled = true;
+                txtSearchStaffID.ReadOnly = false;
+                txtSearchStaffName.ReadOnly = false;
+
                 txtStaffID.Enabled = true;
                 txtStaffID.ReadOnly = true;
                 txtFullname.ReadOnly = true;
                 txtAddress.ReadOnly = true;
                 txtPhoneNumber.ReadOnly = true;
                 txtPassword.ReadOnly = true;
-                txtRoleID.ReadOnly = true;
-                txtStatusID.ReadOnly = true;
+                cboRoleID.Enabled = false;
+                cboStatusID.Enabled = false;
                 txtEmail.ReadOnly = true;
 
                 dgvStaffList.Enabled = true;

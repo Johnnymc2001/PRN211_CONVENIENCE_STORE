@@ -25,6 +25,8 @@ namespace DataAccess.Repository
 
         public TblStaff GetByName(string staffName) => StaffDAO.Instance.GetByName(staffName);
 
-        public TblStaff SearchByIdAndName(string StaffId, string Fullname) => StaffDAO.Instance.SearchByIdAndName(StaffId, Fullname);
+        public List<TblStaff> SearchByIdAndName(string StaffId, string Fullname) => StaffDAO.Instance.SearchByIdAndName(StaffId, Fullname);
+
+        public List<TblStaff> SearchByName(string name) => StaffDAO.Instance.SearchByName(name);
     }
 }

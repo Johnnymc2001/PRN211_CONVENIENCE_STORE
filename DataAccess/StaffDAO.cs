@@ -165,24 +165,43 @@ namespace DataAccess
 
         // THIS IS SEARCH STAFF BY ID AND NAME
 
-        public TblStaff SearchByIdAndName(string StaffId, string Fullname)
+        public List<TblStaff> SearchByIdAndName(string StaffId, string Fullname)
         {
             try
             {
-                TblStaff staff = null;
-                using(var ctx = new prn211group4Context())
+                List<TblStaff> staffs = null;
+                using (var ctx = new prn211group4Context())
                 {
-                    staff = ctx.TblStaffs.SingleOrDefault(staff => staff.StaffId.Equals(StaffId) && staff.FullName.Equals(Fullname));
+                    staffs = ctx.TblStaffs.Where(staff => staff.StaffId.Equals(StaffId) && staff.FullName.Contains(Fullname)).ToList<TblStaff>();
                 }
-                if(staff != null)
+                if(staffs != null)
                 {
-                    return staff;
+                    return staffs;
                 }
             } catch(Exception ex)
             {
                 throw new Exception(ex.Message);
             }
             return null;
+        }
+
+        // THIS IS EARCH BY NAME
+
+        public List<TblStaff> SearchByName(string name)
+        {
+            List< TblStaff> staffs = null;
+            try
+            {
+                using(var ctx = new prn211group4Context())
+                {
+                    staffs = ctx.TblStaffs.Where(staff => staff.FullName.Contains(name)).ToList<TblStaff>();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return staffs;
         }
     }
 }
