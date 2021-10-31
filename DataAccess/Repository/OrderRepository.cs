@@ -17,6 +17,8 @@ namespace DataAccess.Repository
 
         public TblOrder GetByID(Guid Guid) => OrderDAO.Instance.GetByID(Guid);
 
+        public List<TblOrder> GetByStaff(string staffID) => OrderDAO.Instance.GetByStaffID(staffID);
+
         public List<TblOrder> GetByStatus(string status) => OrderDAO.Instance.GetByStatus(status);
 
         public void Update(TblOrder order) => OrderDAO.Instance.Update(order);

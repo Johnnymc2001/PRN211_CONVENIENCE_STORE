@@ -49,7 +49,7 @@ namespace DataAccess
 
         // THIS IS GET STAFF BY ID
 
-        public TblStaff GetByID(Guid staffId)
+        public TblStaff GetByID(string staffId)
         {
             TblStaff staff = null;
             try
@@ -154,10 +154,31 @@ namespace DataAccess
                 if (staff != null)
                 {
                     CurrentAccount = staff;
-                    return CurrentAccount;
                 }
             }
             catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return CurrentAccount;
+        }
+
+        // THIS IS SEARCH STAFF BY ID AND NAME
+
+        public TblStaff SearchByIdAndName(string StaffId, string Fullname)
+        {
+            try
+            {
+                TblStaff staff = null;
+                using(var ctx = new prn211group4Context())
+                {
+                    staff = ctx.TblStaffs.SingleOrDefault(staff => staff.StaffId.Equals(StaffId) && staff.FullName.Equals(Fullname));
+                }
+                if(staff != null)
+                {
+                    return staff;
+                }
+            } catch(Exception ex)
             {
                 throw new Exception(ex.Message);
             }

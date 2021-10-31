@@ -68,7 +68,7 @@ namespace DataAccess
             return order;
         }
 
-        public List<TblOrder> GetByStatus(String statusId)
+        public List<TblOrder> GetByStatus(string statusId)
         {
             List<TblOrder> orders = null;
             try
@@ -84,6 +84,23 @@ namespace DataAccess
             }
             return orders;
         }
+
+        public List<TblOrder> GetByStaffID(string staffID)
+        {
+            List<TblOrder> orders = null;
+            try
+            {
+                using (var ctx = new prn211group4Context())
+                {
+                    orders = ctx.TblOrders.Where(order => order.StaffId.Contains(staffID)).ToList<TblOrder>();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return orders;
+        }   
 
         public void Add(TblOrder order)
         {

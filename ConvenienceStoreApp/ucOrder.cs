@@ -2,13 +2,10 @@
 using DataAccess.Repository;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Media;
 using System.Windows.Forms;
 
 namespace ConvenienceStoreApp
@@ -33,12 +30,13 @@ namespace ConvenienceStoreApp
         IOrderRepository orderRepository = new OrderRepository();
         IOrderDetailRepository orderDetailRepository = new OrderDetailRepository();
         IProductRepository productRepository = new ProductRepository();
+        IStaffRepository staffRepository = new StaffRepository();
 
         Guid orderId;
         List<TblOrderDetail> orderDetails = new List<TblOrderDetail>();
         List<TblProduct> products = new List<TblProduct>();
 
-
+        public TblStaff loggedStaff { get; set; }
         //Dictionary<TblProduct, Int32> orderList = new Dictionary<TblProduct, Int32>();
 
         public ucOrder()
@@ -55,6 +53,7 @@ namespace ConvenienceStoreApp
 
         private void RefreshProductLocal()
         {
+            products = products.Where(p => p.Quantity > 0).ToList();
             UpdateGridViewProducts(products);
         }
 
@@ -75,6 +74,7 @@ namespace ConvenienceStoreApp
                     Quantity = o.Quantity,
                     Price = o.Price,
                 }).ToList();
+
             dgvProducts.DataSource = null;
             dgvProducts.DataSource = listObj;
         }
@@ -82,16 +82,26 @@ namespace ConvenienceStoreApp
         //----------------------------------OrderDetail---------------------------------------------------
         private void RefreshOrderLocal()
         {
-            double? total = 0;
-            orderDetails.ForEach(od => total += od.TotalPrice);
-            lblTotalPrice.Text = total.ToString();
+            double total = CalculateTotal();
 
             UpdateGridViewOrder(orderDetails);
 
         }
+        int? oldIndex = null;
 
         private void UpdateGridViewOrder(List<TblOrderDetail> orderDetails)
         {
+
+
+            try
+            {
+                oldIndex = dgvOrderDetails.CurrentRow.Index;
+            }
+            catch (Exception)
+            {
+
+            }
+
             List<DataGridViewOrderDetailObject> listObj = orderDetails
                 .Select(o => new DataGridViewOrderDetailObject()
                 {
@@ -99,11 +109,88 @@ namespace ConvenienceStoreApp
                     ProductName = products.Single(pr => pr.ProductId == o.ProductId).ProductName,
                     Quantity = o.Quantity,
                 }).ToList();
-            dgvOrderDetails.DataSource = null;
+
+            //dgvOrderDetails.DataSource = null;
             dgvOrderDetails.DataSource = listObj;
+            dgvOrderDetails.ClearSelection();
+
+            if (oldIndex != null && oldIndex >= 0)
+            {
+                try
+                {
+                    dgvOrderDetails.CurrentCell = dgvOrderDetails.Rows[(int)oldIndex].Cells[0];
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    // No Need To Do Anything
+                }
+            }
         }
 
-        //-----------------------------------------------------------------------------------------------------
+        //-----------------------------------Load and Miscs-----------------------------------------------------------
+        private double CalculateTotal()
+        {
+            double total = 0;
+            orderDetails.ForEach(od => total += (double)od.TotalPrice);
+            lblTotalPrice.Text = total.ToString();
+            return total;
+        }
+
+        private void GenerateNewOrder()
+        {
+            // Clean out orderDetails
+            orderDetails.Clear();
+            RefreshOrderLocal();
+            txtCustomerName.Text = "";
+
+            // Refresh Product Lists
+            RefreshProductDatabase();
+
+            // Get a new Guid
+            orderId = Guid.NewGuid();
+
+            // Generate Guid until it unique
+            while (null != orderRepository.GetByID(orderId))
+            {
+                orderId = Guid.NewGuid();
+            }
+
+            lblOrderId.Text = $"Order Id: {orderId.ToString()}";
+            rtbAction.Text = $"New Order";
+        }
+
+        private void ChangeButtonState()
+        {
+            // Order Detail Button
+            if (orderDetails.Count == 0)
+            {
+                btnPlus.Enabled = false;
+                btnMinus.Enabled = false;
+                btnRemove.Enabled = false;
+                btnCheckout.Enabled = false;
+            }
+            else
+            {
+                btnPlus.Enabled = true;
+                btnMinus.Enabled = true;
+                btnRemove.Enabled = true;
+                btnCheckout.Enabled = true;
+            }
+        }
+
+        private void Order_Load(object sender, EventArgs e)
+        {
+            if (!this.DesignMode)
+            {
+                GenerateNewOrder();
+                ChangeButtonState();
+                // Get ME :D
+                //loggedStaff = staffRepository.GetStaffByID("cfec1bf2-1f3a-45dc-9473-478d5fb13006");
+            }
+        }
+
+        //----------------------------------------Normal Event----------------------------------------------------
+
         private TblProduct GetCurrentProduct()
         {
             TblProduct product = null;
@@ -116,7 +203,7 @@ namespace ConvenienceStoreApp
                     product = products.SingleOrDefault(p => p.ProductId.Equals(dataObj.ProductId));
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show($"Missing Data", "Order - Get Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -135,45 +222,15 @@ namespace ConvenienceStoreApp
                     orderDetail = orderDetails.SingleOrDefault(o => o.ProductId.Equals(dataObj.ProductId));
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show($"Missing Data", "Order - Get Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return orderDetail;
         }
 
-        private void Order_Load(object sender, EventArgs e)
-        {
-            RefreshProductDatabase();
-            // Generate New Order ID On Load
-            orderId = Guid.NewGuid();
-
-            // Generate Guid until it unique
-            while (null != orderRepository.GetByID(orderId))
-            {
-                orderId = Guid.NewGuid();
-            }
-
-            lblOrderId.Text = $"Order Id: {orderId.ToString()}";
-
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            RefreshProductDatabase();
-        }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            String searchValue = txtSearch.Text;
-            if (null != searchValue)
-            {
-                SearchProducts(searchValue);
-            }
-
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
+        //-----------------------------------------------------------------------------------------------------
+        private void TryAddProduct()
         {
             TblProduct product = GetCurrentProduct();
             int quantity = (int)txtQuantity.Value;
@@ -197,6 +254,7 @@ namespace ConvenienceStoreApp
                         };
 
                         int newQuantity = (int)(newOd.Quantity + quantity);
+                        // Check Quantity
                         if (newQuantity > product.Quantity)
                         {
                             MessageBox.Show($"There isn't enough product to be added!{Environment.NewLine}[{product.ProductName}'s left : {product.Quantity}]", "Order - Add Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -206,6 +264,7 @@ namespace ConvenienceStoreApp
                             newOd.Quantity = newQuantity;
                             newOd.TotalPrice = product.Price * newQuantity;
                             orderDetails.Add(newOd);
+                            rtbAction.Text = $"Added {quantity} {product.ProductName}";
                         }
                     }
                     // Order contains product
@@ -223,6 +282,7 @@ namespace ConvenienceStoreApp
                         {
                             od.Quantity = newQuantity;
                             od.TotalPrice = product.Price * newQuantity;
+                            rtbAction.Text = $"Added {quantity} {product.ProductName}";
                         }
                     }
                 }
@@ -233,8 +293,61 @@ namespace ConvenienceStoreApp
             }
             finally
             {
+                txtQuantity.Value = 1;
                 RefreshOrderLocal();
+                ChangeButtonState();
             }
+
+        }
+
+        private void TryRemoveOrderDetail()
+        {
+            TblOrderDetail orderDetail = GetCurrentOrderDetail();
+            try
+            {
+                if (null != orderDetail)
+                {
+                    TblProduct product = products.SingleOrDefault(p => p.ProductId.Equals(orderDetail.ProductId));
+                    int? newQuantity = orderDetail.Quantity - 1;
+                    if (newQuantity == 0)
+                    {
+                        orderDetails.Remove(orderDetail);
+                        rtbAction.Text = $"Removed {product.ProductName}";
+                        RefreshOrderLocal();
+                    }
+                    else
+                    {
+                        orderDetail.Quantity = newQuantity;
+                        orderDetail.TotalPrice = product.Price * newQuantity;
+                        rtbAction.Text = $"Removed 1 {product.ProductName}";
+                        RefreshOrderLocal();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Order - Remove 1 Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            ChangeButtonState();
+        }
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshProductDatabase();
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            String searchValue = txtSearch.Text;
+            if (null != searchValue)
+            {
+                SearchProducts(searchValue);
+            }
+
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            TryAddProduct();
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -245,6 +358,8 @@ namespace ConvenienceStoreApp
                 if (null != orderDetail)
                 {
                     orderDetails.Remove(orderDetail);
+                    TblProduct product = products.SingleOrDefault(p => p.ProductId.Equals(orderDetail.ProductId));
+                    rtbAction.Text = $"Removed {product.ProductName}";
                     RefreshOrderLocal();
                 }
             }
@@ -252,7 +367,7 @@ namespace ConvenienceStoreApp
             {
                 MessageBox.Show($"{ex.Message}", "Order - Remove Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
+            ChangeButtonState();
         }
 
         private void btnPlus_Click(object sender, EventArgs e)
@@ -268,6 +383,7 @@ namespace ConvenienceStoreApp
                         int? newQuantity = orderDetail.Quantity + 1;
                         orderDetail.Quantity = newQuantity;
                         orderDetail.TotalPrice = product.Price * newQuantity;
+                        rtbAction.Text = $"Added 1 {product.ProductName}";
                         RefreshOrderLocal();
                     }
                     else
@@ -282,34 +398,75 @@ namespace ConvenienceStoreApp
             {
                 MessageBox.Show($"{ex.Message}", "Order - Add 1 Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            ChangeButtonState();
         }
 
         private void btnMinus_Click(object sender, EventArgs e)
         {
-            TblOrderDetail orderDetail = GetCurrentOrderDetail();
-            try
+            TryRemoveOrderDetail();
+        }
+
+        private void btnCheckout_Click(object sender, EventArgs e)
+        {
+            DialogResult f = MessageBox.Show("Do you want to checkout", "Checkout", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (f == DialogResult.OK)
             {
-                if (null != orderDetail)
+                if (orderDetails.Count > 0)
                 {
-                    TblProduct product = products.SingleOrDefault(p => p.ProductId.Equals(orderDetail.ProductId));
-                    int? newQuantity = orderDetail.Quantity - 1;
-                    if (newQuantity == 0)
+                    TblOrder checkoutOrder = new()
                     {
-                        orderDetails.Remove(orderDetail);
-                        RefreshOrderLocal();
-                    }
-                    else
+                        OrderId = orderId,
+                        StaffId = loggedStaff.StaffId,
+                        CustomerName = txtCustomerName.Text,
+                        Date = DateTime.Now,
+                        OrderPrice = CalculateTotal(),
+                        StatusId = "CheckedOut",
+                    };
+
+                    orderRepository.Add(checkoutOrder);
+
+                    // Just make sure products is up to date
+                    RefreshProductDatabase();
+
+                    foreach (TblOrderDetail od in orderDetails)
                     {
-                        orderDetail.Quantity = newQuantity;
-                        orderDetail.TotalPrice = product.Price * newQuantity;
-                        RefreshOrderLocal();
+                        orderDetailRepository.Add(od);
+
+                        // Get Product out and ready to update
+                        TblProduct product = products.Single(p => p.ProductId == od.ProductId);
+                        product.Quantity -= od.Quantity;
+                        productRepository.Update(product);
                     }
+
+                    ucBill uch = new ucBill()
+                    {
+                        order = checkoutOrder,
+                        orderDetails = orderDetails,
+                        loggedStaff = loggedStaff,
+                        customerName = txtCustomerName.Text,
+                        products = products,
+                    };
+
+                    uch.Show();
+                    SystemSounds.Beep.Play();
+                    GenerateNewOrder();
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}", "Order - Add 1 Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                else
+                {
+                    MessageBox.Show($"You must first add item before checkout!", "Order - Checkout", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                ChangeButtonState();
+            }       
+        }
+
+        private void dgvProducts_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            TryAddProduct();
+        }
+
+        private void dgvOrderDetails_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            TryRemoveOrderDetail();
         }
     }
 }

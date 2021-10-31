@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess
+namespace DataAccess.Repository
 {
     public class StaffRepository : IStaffRepository
     {
@@ -15,7 +15,7 @@ namespace DataAccess
 
         public List<TblStaff> GetAllStaff() => StaffDAO.Instance.GetAll();
 
-        public TblStaff GetStaffByID(Guid staffId) => StaffDAO.Instance.GetByID(staffId);
+        public TblStaff GetStaffByID(string staffId) => StaffDAO.Instance.GetByID(staffId);
 
         public void Update(TblStaff staff) => StaffDAO.Instance.Update(staff);
 
@@ -24,5 +24,7 @@ namespace DataAccess
         public TblStaff GetCurrentAccount() => StaffDAO.Instance.GetCurrentAccount();
 
         public TblStaff GetByName(string staffName) => StaffDAO.Instance.GetByName(staffName);
+
+        public TblStaff SearchByIdAndName(string StaffId, string Fullname) => StaffDAO.Instance.SearchByIdAndName(StaffId, Fullname);
     }
 }

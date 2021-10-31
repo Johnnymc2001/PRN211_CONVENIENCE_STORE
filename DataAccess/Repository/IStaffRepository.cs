@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using DataAccess;
 using BusinessObject.Models;
 
-namespace DataAccess
+namespace DataAccess.Repository
 {
     public interface IStaffRepository
     {
         List<TblStaff> GetAllStaff();
 
-        TblStaff GetStaffByID(Guid staffId);
+        TblStaff GetStaffByID(string staffId);
 
         void Add(TblStaff staff);
 
@@ -25,5 +25,7 @@ namespace DataAccess
         TblStaff GetCurrentAccount();
 
         TblStaff GetByName(string staffName);
+
+        public TblStaff SearchByIdAndName(string StaffId, string Fullname);
     }
 }

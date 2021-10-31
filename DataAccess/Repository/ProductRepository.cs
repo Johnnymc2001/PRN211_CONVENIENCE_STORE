@@ -18,5 +18,9 @@ namespace DataAccess.Repository
         List<TblProduct> IProductRepository.GetAllProductByCategory(string categoryID) => ProductDAO.Instance.GetAllProductByCategory(categoryID);
 
         void IProductRepository.Update(TblProduct product) => ProductDAO.Instance.UpdateProduct(product);
+
+        public TblProduct GetProductByID(string productID) => ProductDAO.Instance.GetProductByID(productID);
+
+        public List<TblProduct> GetAllProductByName(string Name) => ProductDAO.Instance.GetAllProductByName(Name);
     }
 }

@@ -44,6 +44,9 @@ namespace ConvenienceStoreApp
             this.lblOrderId = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.rtbAction = new System.Windows.Forms.RichTextBox();
+            this.txtCustomerName = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
@@ -51,22 +54,31 @@ namespace ConvenienceStoreApp
             // 
             // dgvOrderDetails
             // 
+            this.dgvOrderDetails.AllowUserToAddRows = false;
+            this.dgvOrderDetails.AllowUserToDeleteRows = false;
+            this.dgvOrderDetails.AllowUserToResizeColumns = false;
+            this.dgvOrderDetails.AllowUserToResizeRows = false;
+            this.dgvOrderDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOrderDetails.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvOrderDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOrderDetails.Location = new System.Drawing.Point(744, 34);
+            this.dgvOrderDetails.MultiSelect = false;
             this.dgvOrderDetails.Name = "dgvOrderDetails";
             this.dgvOrderDetails.ReadOnly = true;
+            this.dgvOrderDetails.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvOrderDetails.RowHeadersVisible = false;
             this.dgvOrderDetails.RowTemplate.Height = 25;
             this.dgvOrderDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvOrderDetails.Size = new System.Drawing.Size(338, 351);
             this.dgvOrderDetails.TabIndex = 0;
+            this.dgvOrderDetails.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrderDetails_CellContentDoubleClick);
             // 
             // btnAdd
             // 
             this.btnAdd.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(654, 51);
+            this.btnAdd.Location = new System.Drawing.Point(654, 84);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(84, 24);
             this.btnAdd.TabIndex = 2;
@@ -76,7 +88,7 @@ namespace ConvenienceStoreApp
             // 
             // txtQuantity
             // 
-            this.txtQuantity.Location = new System.Drawing.Point(594, 51);
+            this.txtQuantity.Location = new System.Drawing.Point(594, 84);
             this.txtQuantity.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -137,9 +149,9 @@ namespace ConvenienceStoreApp
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(94, 52);
+            this.txtSearch.Location = new System.Drawing.Point(104, 84);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(494, 23);
+            this.txtSearch.Size = new System.Drawing.Size(484, 23);
             this.txtSearch.TabIndex = 8;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -154,6 +166,7 @@ namespace ConvenienceStoreApp
             this.btnCheckout.TabIndex = 9;
             this.btnCheckout.Text = "Checkout";
             this.btnCheckout.UseVisualStyleBackColor = false;
+            this.btnCheckout.Click += new System.EventHandler(this.btnCheckout_Click);
             // 
             // lblTotal
             // 
@@ -182,9 +195,9 @@ namespace ConvenienceStoreApp
             this.btnRefresh.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
-            this.btnRefresh.Location = new System.Drawing.Point(4, 52);
+            this.btnRefresh.Location = new System.Drawing.Point(4, 84);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(84, 23);
+            this.btnRefresh.Size = new System.Drawing.Size(71, 23);
             this.btnRefresh.TabIndex = 12;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = false;
@@ -192,24 +205,28 @@ namespace ConvenienceStoreApp
             // 
             // dgvProducts
             // 
+            this.dgvProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProducts.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProducts.Location = new System.Drawing.Point(4, 78);
+            this.dgvProducts.Location = new System.Drawing.Point(4, 113);
             this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.ReadOnly = true;
+            this.dgvProducts.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvProducts.RowHeadersVisible = false;
             this.dgvProducts.RowTemplate.Height = 25;
             this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProducts.Size = new System.Drawing.Size(734, 433);
+            this.dgvProducts.Size = new System.Drawing.Size(734, 381);
             this.dgvProducts.TabIndex = 13;
+            this.dgvProducts.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentDoubleClick);
             // 
             // lblOrderId
             // 
             this.lblOrderId.AutoSize = true;
             this.lblOrderId.Location = new System.Drawing.Point(4, 536);
             this.lblOrderId.Name = "lblOrderId";
-            this.lblOrderId.Size = new System.Drawing.Size(38, 15);
+            this.lblOrderId.Size = new System.Drawing.Size(78, 15);
             this.lblOrderId.TabIndex = 14;
-            this.lblOrderId.Text = "label1";
+            this.lblOrderId.Text = "OrderId.Value";
             // 
             // label1
             // 
@@ -231,10 +248,42 @@ namespace ConvenienceStoreApp
             this.label2.TabIndex = 16;
             this.label2.Text = "Biil";
             // 
+            // rtbAction
+            // 
+            this.rtbAction.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.rtbAction.Font = new System.Drawing.Font("BIZ UDPGothic", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.rtbAction.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.rtbAction.Location = new System.Drawing.Point(126, 10);
+            this.rtbAction.Name = "rtbAction";
+            this.rtbAction.ReadOnly = true;
+            this.rtbAction.Size = new System.Drawing.Size(612, 39);
+            this.rtbAction.TabIndex = 17;
+            this.rtbAction.Text = "Action";
+            // 
+            // txtCustomerName
+            // 
+            this.txtCustomerName.Location = new System.Drawing.Point(104, 52);
+            this.txtCustomerName.Name = "txtCustomerName";
+            this.txtCustomerName.Size = new System.Drawing.Size(180, 23);
+            this.txtCustomerName.TabIndex = 18;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 55);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(94, 15);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "Customer Name";
+            // 
             // ucOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtCustomerName);
+            this.Controls.Add(this.rtbAction);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblOrderId);
@@ -278,5 +327,8 @@ namespace ConvenienceStoreApp
         private System.Windows.Forms.Label lblOrderId;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RichTextBox rtbAction;
+        private System.Windows.Forms.TextBox txtCustomerName;
+        private System.Windows.Forms.Label label3;
     }
 }
