@@ -29,24 +29,24 @@ namespace ConvenienceStoreApp
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucSelfOrdersView1 = new ConvenienceStoreApp.ucSelfOrdersView();
+            this.ucOrder1 = new ConvenienceStoreApp.ucOrder();
             this.SuspendLayout();
             // 
-            // ucSelfOrdersView1
+            // ucOrder1
             // 
-            this.ucSelfOrdersView1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ucSelfOrdersView1.Location = new System.Drawing.Point(13, 13);
-            this.ucSelfOrdersView1.loggedStaff = null;
-            this.ucSelfOrdersView1.Name = "ucSelfOrdersView1";
-            this.ucSelfOrdersView1.Size = new System.Drawing.Size(1085, 554);
-            this.ucSelfOrdersView1.TabIndex = 0;
+            this.ucOrder1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ucOrder1.Location = new System.Drawing.Point(3, 13);
+            this.ucOrder1.loggedStaff = null;
+            this.ucOrder1.Name = "ucOrder1";
+            this.ucOrder1.Size = new System.Drawing.Size(1085, 554);
+            this.ucOrder1.TabIndex = 0;
             // 
             // frmJohnny
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1224, 600);
-            this.Controls.Add(this.ucSelfOrdersView1);
+            this.Controls.Add(this.ucOrder1);
             this.Name = "frmJohnny";
             this.Text = "frmJohnny";
             this.Load += new System.EventHandler(this.frmJohnny_Load);
@@ -56,6 +56,6 @@ namespace ConvenienceStoreApp
 
         #endregion
 
-        private ucSelfOrdersView ucSelfOrdersView1;
+        private ucOrder ucOrder1;
     }
 }

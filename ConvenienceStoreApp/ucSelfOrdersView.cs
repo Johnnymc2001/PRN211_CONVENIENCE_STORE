@@ -136,6 +136,7 @@ namespace ConvenienceStoreApp
             dgvOrderDetails.DataSource = null;
             dgvOrderDetails.DataSource = dataObj;
         }
+        
         // -----------------------------------------------------------------------------------------------------------
         private TblOrder GetCurrentOrder()
         {

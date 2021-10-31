@@ -53,8 +53,9 @@ namespace ConvenienceStoreApp
 
         private void RefreshProductLocal()
         {
-            products = products.Where(p => p.Quantity > 0).ToList();
-            UpdateGridViewProducts(products);
+            List<TblProduct> showProducts = new List<TblProduct>();
+            showProducts = products.Where(p => p.Quantity > 0).ToList();
+            UpdateGridViewProducts(showProducts);
         }
 
         private void SearchProducts(string productName)
@@ -411,52 +412,88 @@ namespace ConvenienceStoreApp
             DialogResult f = MessageBox.Show("Do you want to checkout", "Checkout", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (f == DialogResult.OK)
             {
-                if (orderDetails.Count > 0)
+                RefreshProductDatabase();
+
+                bool isEnough = true;
+
+                foreach (var od in orderDetails)
                 {
-                    TblOrder checkoutOrder = new()
+                    if (od.Quantity > products.Single(p => p.ProductId == od.ProductId).Quantity)
                     {
-                        OrderId = orderId,
-                        StaffId = loggedStaff.StaffId,
-                        CustomerName = txtCustomerName.Text,
-                        Date = DateTime.Now,
-                        OrderPrice = CalculateTotal(),
-                        StatusId = "CheckedOut",
-                    };
-
-                    orderRepository.Add(checkoutOrder);
-
-                    // Just make sure products is up to date
-                    RefreshProductDatabase();
-
-                    foreach (TblOrderDetail od in orderDetails)
-                    {
-                        orderDetailRepository.Add(od);
-
-                        // Get Product out and ready to update
-                        TblProduct product = products.Single(p => p.ProductId == od.ProductId);
-                        product.Quantity -= od.Quantity;
-                        productRepository.Update(product);
+                        isEnough = false;
                     }
-
-                    ucBill uch = new ucBill()
-                    {
-                        order = checkoutOrder,
-                        orderDetails = orderDetails,
-                        loggedStaff = loggedStaff,
-                        customerName = txtCustomerName.Text,
-                        products = products,
-                    };
-
-                    uch.Show();
-                    SystemSounds.Beep.Play();
-                    GenerateNewOrder();
                 }
-                else
+
+                if (isEnough)
                 {
-                    MessageBox.Show($"You must first add item before checkout!", "Order - Checkout", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (orderDetails.Count > 0)
+                    {
+                        TblOrder checkoutOrder = new()
+                        {
+                            OrderId = orderId,
+                            StaffId = loggedStaff.StaffId,
+                            CustomerName = txtCustomerName.Text,
+                            Date = DateTime.Now,
+                            OrderPrice = CalculateTotal(),
+                            StatusId = "CheckedOut",
+                        };
+
+                        orderRepository.Add(checkoutOrder);
+
+                        // Just make sure products is up to date
+                        RefreshProductDatabase();
+
+                        foreach (TblOrderDetail od in orderDetails)
+                        {
+                            orderDetailRepository.Add(od);
+
+                            // Get Product out and ready to update
+                            TblProduct product = products.Single(p => p.ProductId == od.ProductId);
+                            product.Quantity -= od.Quantity;
+                            productRepository.Update(product);
+                        }
+
+                        ucBill uch = new ucBill()
+                        {
+                            order = checkoutOrder,
+                            orderDetails = orderDetails,
+                            loggedStaff = loggedStaff,
+                            customerName = txtCustomerName.Text,
+                            products = products,
+                        };
+
+                        uch.Show();
+                        SystemSounds.Beep.Play();
+                        GenerateNewOrder();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"You must first add item before checkout!", "Order - Checkout", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    ChangeButtonState();
+                } else
+                {
+                    // Database unsycned
+                    MessageBox.Show($"Products is not enough under database!", "Order - Checkout", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    foreach (var od in orderDetails)
+                    {
+                        TblProduct prod = products.Single(p => p.ProductId == od.ProductId);
+                        if (od.Quantity > prod.Quantity)
+                        {
+                            if (prod.Quantity == 0)
+                            {
+                                orderDetails.RemoveAll(odTotalPrice => od.ProductId == prod.ProductId);
+                            } else
+                            {
+                                od.Quantity = prod.Quantity;
+                            }
+                        }
+                    }
                 }
-                ChangeButtonState();
-            }       
+
+
+            }
         }
 
         private void dgvProducts_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
