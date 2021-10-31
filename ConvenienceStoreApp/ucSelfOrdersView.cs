@@ -57,8 +57,8 @@ namespace ConvenienceStoreApp
             orders = orders.Where(o => o.StaffId == loggedStaff.StaffId).ToList();
             orders = orders.OrderBy(o => o.Date).ToList();
 
-            dtpStart.Value = (DateTime)orders.First().Date;
-            dtpEnd.Value = (DateTime)orders.Last().Date;
+            //dtpStart.Value = (DateTime)orders.First().Date;
+            //dtpEnd.Value = (DateTime)orders.Last().Date;
 
             UpdateGridViewOrder(orders);
         }
@@ -172,7 +172,7 @@ namespace ConvenienceStoreApp
             if (!this.DesignMode)
             {
                 products = productRepository.GetAllProduct();
-                //loggedStaff = staffRepository.GetStaffByID("cfec1bf2-1f3a-45dc-9473-478d5fb13006");
+                loggedStaff = staffRepository.GetCurrentAccount();
                 RefreshOrderDatabase();
             }
         }

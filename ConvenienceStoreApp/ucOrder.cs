@@ -186,7 +186,7 @@ namespace ConvenienceStoreApp
                 GenerateNewOrder();
                 ChangeButtonState();
                 // Get ME :D
-                //loggedStaff = staffRepository.GetStaffByID("cfec1bf2-1f3a-45dc-9473-478d5fb13006");
+                loggedStaff = staffRepository.GetCurrentAccount();
             }
         }
 

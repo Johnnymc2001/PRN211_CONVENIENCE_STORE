@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DataAccess;
 using DataAccess.Repository;
 using BusinessObject.Models;
+using System.Diagnostics;
 
 namespace ConvenienceStoreApp
 {
@@ -207,12 +208,15 @@ namespace ConvenienceStoreApp
             {
                 try
                 {
+                    double price = double.Parse(txtPrice.Text);
+                    int qty = int.Parse(txtQuantity.Text);
+                    Trace.WriteLine("Con de co ok ko?: "+qty+" Price: "+price);
                     TblProduct product = new TblProduct
                     {
                         ProductId = txtProductID.Text,
                         ProductName = txtProductName.Text,
-                        Price = double.Parse(txtPrice.Text),
-                        Quantity = int.Parse(txtQuantity.Text),
+                        Price = price,
+                        Quantity = qty,
                         CategoryId = txtCategoryID.Text,
                         StatusId = txtStatusID.Text
                     };
