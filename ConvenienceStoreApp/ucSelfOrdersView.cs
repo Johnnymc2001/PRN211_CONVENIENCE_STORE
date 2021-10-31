@@ -57,8 +57,12 @@ namespace ConvenienceStoreApp
             orders = orders.Where(o => o.StaffId == loggedStaff.StaffId).ToList();
             orders = orders.OrderBy(o => o.Date).ToList();
 
-            //dtpStart.Value = (DateTime)orders.First().Date;
-            //dtpEnd.Value = (DateTime)orders.Last().Date;
+            if (orders.Count > 0)
+            {
+                dtpStart.Value = (DateTime)orders.First().Date;
+                dtpEnd.Value = (DateTime)orders.Last().Date;
+            }
+
 
             UpdateGridViewOrder(orders);
         }

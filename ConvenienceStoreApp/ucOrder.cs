@@ -92,8 +92,6 @@ namespace ConvenienceStoreApp
 
         private void UpdateGridViewOrder(List<TblOrderDetail> orderDetails)
         {
-
-
             try
             {
                 oldIndex = dgvOrderDetails.CurrentRow.Index;
@@ -476,12 +474,12 @@ namespace ConvenienceStoreApp
                     // Database unsycned
                     MessageBox.Show($"Products is not enough under database!", "Order - Checkout", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                    foreach (var od in orderDetails)
+                    foreach (var od in orderDetails.ToList())
                     {
                         TblProduct prod = products.Single(p => p.ProductId == od.ProductId);
                         if (od.Quantity > prod.Quantity)
                         {
-                            if (prod.Quantity == 0)
+                            if (((int) prod.Quantity) == 0)
                             {
                                 orderDetails.RemoveAll(odTotalPrice => od.ProductId == prod.ProductId);
                             } else
@@ -490,6 +488,8 @@ namespace ConvenienceStoreApp
                             }
                         }
                     }
+                    RefreshOrderLocal();
+                    ChangeButtonState();
                 }
 
 
