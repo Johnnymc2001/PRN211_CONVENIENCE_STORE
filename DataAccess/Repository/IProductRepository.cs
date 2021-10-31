@@ -19,5 +19,9 @@ namespace DataAccess.Repository
 
         void Update(TblProduct product);
 
+        public TblProduct GetProductByID(string productID);
+
+        public List<TblProduct> GetAllProductByName(string Name);
+
     }
 }

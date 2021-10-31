@@ -24,5 +24,7 @@ namespace DataAccess.Repository
         public TblStaff GetCurrentAccount() => StaffDAO.Instance.GetCurrentAccount();
 
         public TblStaff GetByName(string staffName) => StaffDAO.Instance.GetByName(staffName);
+
+        public TblStaff SearchByIdAndName(string StaffId, string Fullname) => StaffDAO.Instance.SearchByIdAndName(StaffId, Fullname);
     }
 }
