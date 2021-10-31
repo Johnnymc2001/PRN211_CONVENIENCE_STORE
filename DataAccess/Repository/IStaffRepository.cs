@@ -25,5 +25,7 @@ namespace DataAccess.Repository
         TblStaff GetCurrentAccount();
 
         TblStaff GetByName(string staffName);
+
+        public TblStaff SearchByIdAndName(string StaffId, string Fullname);
     }
 }

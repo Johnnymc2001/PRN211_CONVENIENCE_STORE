@@ -28,7 +28,6 @@ namespace DataAccess
             }
         }
 
-
         public List<TblProduct> GetAllProduct()
         {
             List<TblProduct> listProduct = new List<TblProduct>();
@@ -54,7 +53,7 @@ namespace DataAccess
                 using (var ctx = new prn211group4Context())
                 {
                     listProduct = ctx.TblProducts.ToList();
-                    listProduct.Where(product => product.Status.Equals("Available")).ToList<TblProduct>();
+                    listProduct = listProduct.Where(product => product.StatusId.Equals("Available")).ToList<TblProduct>();
                 }
             }
             catch (Exception ex)
@@ -62,6 +61,41 @@ namespace DataAccess
                 throw new Exception(ex.Message);
             }
             return listProduct;
+        }
+
+        public List<TblProduct> GetAllProductByName(string Name)
+        {
+            List<TblProduct> listProduct = new List<TblProduct>();
+            try
+            {
+                using (var ctx = new prn211group4Context())
+                {
+                    listProduct = ctx.TblProducts.ToList();
+                    listProduct = listProduct.Where(product => product.ProductName.Equals(Name)).ToList<TblProduct>();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return listProduct;
+        }
+
+        public TblProduct GetProductByID(string productID)
+        {
+            TblProduct Product = null;
+            try
+            {
+                using (var ctx = new prn211group4Context())
+                {
+                    Product = ctx.TblProducts.SingleOrDefault(product => product.ProductId.Equals(productID));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return Product;
         }
 
         public List<TblProduct> GetAllProductByCategory(string productID)
@@ -72,7 +106,7 @@ namespace DataAccess
                 using (var ctx = new prn211group4Context())
                 {
                     listProduct = ctx.TblProducts.ToList();
-                    listProduct.Where(product => product.CategoryId.Equals(productID)).ToList<TblProduct>();
+                    listProduct = listProduct.Where(product => product.CategoryId.Equals(productID)).ToList<TblProduct>();
                 }
             }
             catch (Exception ex)
