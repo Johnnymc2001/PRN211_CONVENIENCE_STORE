@@ -410,7 +410,7 @@ namespace ConvenienceStoreApp
             // 
             // ucProductManagement1
             // 
-            this.ucProductManagement1.Location = new System.Drawing.Point(214, 166);
+            this.ucProductManagement1.Location = new System.Drawing.Point(215, 166);
             this.ucProductManagement1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucProductManagement1.Name = "ucProductManagement1";
             this.ucProductManagement1.Size = new System.Drawing.Size(1085, 554);
@@ -419,7 +419,7 @@ namespace ConvenienceStoreApp
             // ucSelfOrdersView1
             // 
             this.ucSelfOrdersView1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ucSelfOrdersView1.Location = new System.Drawing.Point(214, 166);
+            this.ucSelfOrdersView1.Location = new System.Drawing.Point(215, 166);
             this.ucSelfOrdersView1.loggedStaff = null;
             this.ucSelfOrdersView1.Name = "ucSelfOrdersView1";
             this.ucSelfOrdersView1.Size = new System.Drawing.Size(1085, 554);
@@ -427,7 +427,7 @@ namespace ConvenienceStoreApp
             // 
             // ucStaffManagement1
             // 
-            this.ucStaffManagement1.Location = new System.Drawing.Point(214, 165);
+            this.ucStaffManagement1.Location = new System.Drawing.Point(215, 166);
             this.ucStaffManagement1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ucStaffManagement1.Name = "ucStaffManagement1";
             this.ucStaffManagement1.Size = new System.Drawing.Size(1085, 554);
