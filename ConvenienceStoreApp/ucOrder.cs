@@ -53,6 +53,7 @@ namespace ConvenienceStoreApp
 
         private void RefreshProductLocal()
         {
+            products = products.Where(p => p.Quantity > 0).ToList();
             UpdateGridViewProducts(products);
         }
 
@@ -96,7 +97,7 @@ namespace ConvenienceStoreApp
             {
                 oldIndex = dgvOrderDetails.CurrentRow.Index;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -119,7 +120,7 @@ namespace ConvenienceStoreApp
                 {
                     dgvOrderDetails.CurrentCell = dgvOrderDetails.Rows[(int)oldIndex].Cells[0];
                 }
-                catch (ArgumentOutOfRangeException ex)
+                catch (ArgumentOutOfRangeException)
                 {
                     // No Need To Do Anything
                 }
@@ -184,7 +185,7 @@ namespace ConvenienceStoreApp
                 GenerateNewOrder();
                 ChangeButtonState();
                 // Get ME :D
-                loggedStaff = staffRepository.GetStaffByID("cfec1bf2-1f3a-45dc-9473-478d5fb13006");
+                //loggedStaff = staffRepository.GetStaffByID("cfec1bf2-1f3a-45dc-9473-478d5fb13006");
             }
         }
 
@@ -202,7 +203,7 @@ namespace ConvenienceStoreApp
                     product = products.SingleOrDefault(p => p.ProductId.Equals(dataObj.ProductId));
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show($"Missing Data", "Order - Get Product", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -221,7 +222,7 @@ namespace ConvenienceStoreApp
                     orderDetail = orderDetails.SingleOrDefault(o => o.ProductId.Equals(dataObj.ProductId));
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show($"Missing Data", "Order - Get Order", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -407,52 +408,55 @@ namespace ConvenienceStoreApp
 
         private void btnCheckout_Click(object sender, EventArgs e)
         {
-            if (orderDetails.Count > 0)
+            DialogResult f = MessageBox.Show("Do you want to checkout", "Checkout", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (f == DialogResult.OK)
             {
-
-                TblOrder checkoutOrder = new()
+                if (orderDetails.Count > 0)
                 {
-                    OrderId = orderId,
-                    StaffId = loggedStaff.StaffId,
-                    CustomerName = txtCustomerName.Text,
-                    Date = DateTime.Now,
-                    OrderPrice = CalculateTotal(),
-                    StatusId = "CheckedOut",
-                };
+                    TblOrder checkoutOrder = new()
+                    {
+                        OrderId = orderId,
+                        StaffId = loggedStaff.StaffId,
+                        CustomerName = txtCustomerName.Text,
+                        Date = DateTime.Now,
+                        OrderPrice = CalculateTotal(),
+                        StatusId = "CheckedOut",
+                    };
 
-                orderRepository.Add(checkoutOrder);
+                    orderRepository.Add(checkoutOrder);
 
-                // Just make sure products is up to date
-                RefreshProductDatabase();
+                    // Just make sure products is up to date
+                    RefreshProductDatabase();
 
-                foreach (TblOrderDetail od in orderDetails)
-                {
-                    orderDetailRepository.Add(od);
+                    foreach (TblOrderDetail od in orderDetails)
+                    {
+                        orderDetailRepository.Add(od);
 
-                    // Get Product out and ready to update
-                    TblProduct product = products.Single(p => p.ProductId == od.ProductId);
-                    product.Quantity -= od.Quantity;
-                    productRepository.Update(product);
+                        // Get Product out and ready to update
+                        TblProduct product = products.Single(p => p.ProductId == od.ProductId);
+                        product.Quantity -= od.Quantity;
+                        productRepository.Update(product);
+                    }
+
+                    ucBill uch = new ucBill()
+                    {
+                        order = checkoutOrder,
+                        orderDetails = orderDetails,
+                        loggedStaff = loggedStaff,
+                        customerName = txtCustomerName.Text,
+                        products = products,
+                    };
+
+                    uch.Show();
+                    SystemSounds.Beep.Play();
+                    GenerateNewOrder();
                 }
-
-                ucBill uch = new ucBill()
+                else
                 {
-                    order = checkoutOrder,
-                    orderDetails = orderDetails,
-                    loggedStaff = loggedStaff,
-                    customerName = txtCustomerName.Text,
-                    products = products,
-                };
-
-                uch.Show();
-                SystemSounds.Beep.Play();
-                GenerateNewOrder();
-            }
-            else
-            {
-                MessageBox.Show($"You must first add item before checkout!", "Order - Checkout", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            ChangeButtonState();
+                    MessageBox.Show($"You must first add item before checkout!", "Order - Checkout", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                ChangeButtonState();
+            }       
         }
 
         private void dgvProducts_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)

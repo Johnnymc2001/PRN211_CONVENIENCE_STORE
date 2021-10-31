@@ -34,21 +34,19 @@ namespace ConvenienceStoreApp
             // 
             // ucSelfOrdersView1
             // 
-            this.ucSelfOrdersView1.Location = new System.Drawing.Point(13, 27);
+            this.ucSelfOrdersView1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ucSelfOrdersView1.Location = new System.Drawing.Point(13, 13);
             this.ucSelfOrdersView1.loggedStaff = null;
             this.ucSelfOrdersView1.Name = "ucSelfOrdersView1";
             this.ucSelfOrdersView1.Size = new System.Drawing.Size(1085, 554);
             this.ucSelfOrdersView1.TabIndex = 0;
             // 
-
             // frmJohnny
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1169, 630);
-
+            this.ClientSize = new System.Drawing.Size(1224, 600);
             this.Controls.Add(this.ucSelfOrdersView1);
-
             this.Name = "frmJohnny";
             this.Text = "frmJohnny";
             this.Load += new System.EventHandler(this.frmJohnny_Load);

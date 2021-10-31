@@ -250,9 +250,9 @@ namespace ConvenienceStoreApp
             // 
             // rtbAction
             // 
-            this.rtbAction.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.rtbAction.BackColor = System.Drawing.Color.WhiteSmoke;
             this.rtbAction.Font = new System.Drawing.Font("BIZ UDPGothic", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.rtbAction.ForeColor = System.Drawing.Color.SpringGreen;
+            this.rtbAction.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.rtbAction.Location = new System.Drawing.Point(126, 10);
             this.rtbAction.Name = "rtbAction";
             this.rtbAction.ReadOnly = true;

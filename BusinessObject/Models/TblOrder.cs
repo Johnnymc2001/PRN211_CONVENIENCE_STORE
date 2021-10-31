@@ -23,5 +23,10 @@ namespace BusinessObject.Models
         public virtual TblStaff Staff { get; set; }
         public virtual TblStatus Status { get; set; }
         public virtual ICollection<TblOrderDetail> TblOrderDetails { get; set; }
+
+        public override string ToString()
+        {
+            return $"{{{nameof(OrderId)}={OrderId.ToString()}, {nameof(StaffId)}={StaffId}, {nameof(CustomerName)}={CustomerName}, {nameof(Date)}={Date.ToString()}, {nameof(OrderPrice)}={OrderPrice.ToString()}, {nameof(StatusId)}={StatusId}, {nameof(PaymentMethod)}={PaymentMethod}, {nameof(Staff)}={Staff}, {nameof(Status)}={Status}, {nameof(TblOrderDetails)}={TblOrderDetails}}}";
+        }
     }
 }
