@@ -95,6 +95,8 @@ namespace ConvenienceStoreApp
             // dgvStaffList
             // 
             this.dgvStaffList.AllowUserToAddRows = false;
+            this.dgvStaffList.AllowUserToDeleteRows = false;
+            this.dgvStaffList.BackgroundColor = System.Drawing.Color.White;
             this.dgvStaffList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStaffList.Location = new System.Drawing.Point(3, 375);
             this.dgvStaffList.Name = "dgvStaffList";
@@ -289,12 +291,14 @@ namespace ConvenienceStoreApp
             // 
             // btnRefresh
             // 
+            this.btnRefresh.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnRefresh.ForeColor = System.Drawing.Color.White;
             this.btnRefresh.Location = new System.Drawing.Point(18, 340);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(94, 29);
             this.btnRefresh.TabIndex = 39;
             this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.UseVisualStyleBackColor = false;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // cboRoleID

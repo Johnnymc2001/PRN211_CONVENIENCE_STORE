@@ -71,7 +71,7 @@ namespace DataAccess
                 using (var ctx = new prn211group4Context())
                 {
                     listProduct = ctx.TblProducts.ToList();
-                    listProduct = listProduct.Where(product => product.ProductName.Equals(Name)).ToList<TblProduct>();
+                    listProduct = listProduct.Where(product => product.ProductName.ToLower().Contains(Name.ToLower())).ToList<TblProduct>();
                 }
             }
             catch (Exception ex)

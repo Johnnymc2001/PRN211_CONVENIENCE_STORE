@@ -48,10 +48,10 @@ namespace ConvenienceStoreApp
             this.txtProductName = new System.Windows.Forms.TextBox();
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.txtQuantity = new System.Windows.Forms.TextBox();
-            this.txtCategoryID = new System.Windows.Forms.TextBox();
-            this.txtStatusID = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
+            this.cboStatusID = new System.Windows.Forms.ComboBox();
+            this.cboCategoryID = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,7 +59,7 @@ namespace ConvenienceStoreApp
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(19, 24);
+            this.label11.Location = new System.Drawing.Point(3, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(477, 60);
             this.label11.TabIndex = 35;
@@ -67,32 +67,38 @@ namespace ConvenienceStoreApp
             // 
             // txtSearchValue
             // 
-            this.txtSearchValue.Location = new System.Drawing.Point(143, 223);
+            this.txtSearchValue.Location = new System.Drawing.Point(136, 141);
             this.txtSearchValue.Name = "txtSearchValue";
             this.txtSearchValue.Size = new System.Drawing.Size(261, 27);
             this.txtSearchValue.TabIndex = 38;
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(143, 271);
+            this.btnSearch.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnSearch.ForeColor = System.Drawing.Color.White;
+            this.btnSearch.Location = new System.Drawing.Point(136, 184);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(94, 29);
+            this.btnSearch.Size = new System.Drawing.Size(94, 37);
             this.btnSearch.TabIndex = 40;
             this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // dgvProductList
             // 
             this.dgvProductList.AllowUserToAddRows = false;
+            this.dgvProductList.AllowUserToDeleteRows = false;
+            this.dgvProductList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dgvProductList.BackgroundColor = System.Drawing.Color.White;
             this.dgvProductList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProductList.Location = new System.Drawing.Point(3, 458);
+            this.dgvProductList.Location = new System.Drawing.Point(3, 322);
+            this.dgvProductList.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.dgvProductList.Name = "dgvProductList";
             this.dgvProductList.ReadOnly = true;
             this.dgvProductList.RowHeadersWidth = 51;
             this.dgvProductList.RowTemplate.Height = 29;
             this.dgvProductList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProductList.Size = new System.Drawing.Size(1234, 278);
+            this.dgvProductList.Size = new System.Drawing.Size(1234, 414);
             this.dgvProductList.TabIndex = 41;
             // 
             // cboSelect
@@ -102,7 +108,7 @@ namespace ConvenienceStoreApp
             "Product ID",
             "Product Name",
             "Category ID"});
-            this.cboSelect.Location = new System.Drawing.Point(19, 222);
+            this.cboSelect.Location = new System.Drawing.Point(12, 140);
             this.cboSelect.Name = "cboSelect";
             this.cboSelect.Size = new System.Drawing.Size(118, 28);
             this.cboSelect.TabIndex = 42;
@@ -112,7 +118,7 @@ namespace ConvenienceStoreApp
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label12.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label12.Location = new System.Drawing.Point(19, 152);
+            this.label12.Location = new System.Drawing.Point(12, 70);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(124, 45);
             this.label12.TabIndex = 43;
@@ -120,22 +126,26 @@ namespace ConvenienceStoreApp
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(19, 423);
+            this.btnRefresh.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnRefresh.ForeColor = System.Drawing.Color.White;
+            this.btnRefresh.Location = new System.Drawing.Point(3, 279);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(94, 29);
+            this.btnRefresh.Size = new System.Drawing.Size(94, 37);
             this.btnRefresh.TabIndex = 44;
             this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.UseVisualStyleBackColor = false;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // btnAvailable
             // 
-            this.btnAvailable.Location = new System.Drawing.Point(119, 423);
+            this.btnAvailable.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnAvailable.ForeColor = System.Drawing.Color.White;
+            this.btnAvailable.Location = new System.Drawing.Point(103, 279);
             this.btnAvailable.Name = "btnAvailable";
-            this.btnAvailable.Size = new System.Drawing.Size(118, 29);
+            this.btnAvailable.Size = new System.Drawing.Size(118, 37);
             this.btnAvailable.TabIndex = 45;
             this.btnAvailable.Text = "Available";
-            this.btnAvailable.UseVisualStyleBackColor = true;
+            this.btnAvailable.UseVisualStyleBackColor = false;
             this.btnAvailable.Click += new System.EventHandler(this.btnAvailable_Click);
             // 
             // label1
@@ -143,7 +153,7 @@ namespace ConvenienceStoreApp
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label1.Location = new System.Drawing.Point(644, 152);
+            this.label1.Location = new System.Drawing.Point(637, 70);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(432, 45);
             this.label1.TabIndex = 46;
@@ -152,7 +162,7 @@ namespace ConvenienceStoreApp
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(621, 216);
+            this.label2.Location = new System.Drawing.Point(614, 134);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(79, 20);
             this.label2.TabIndex = 47;
@@ -161,7 +171,7 @@ namespace ConvenienceStoreApp
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(596, 266);
+            this.label3.Location = new System.Drawing.Point(589, 184);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(104, 20);
             this.label3.TabIndex = 48;
@@ -170,7 +180,7 @@ namespace ConvenienceStoreApp
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(659, 318);
+            this.label4.Location = new System.Drawing.Point(652, 236);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 20);
             this.label4.TabIndex = 49;
@@ -179,7 +189,7 @@ namespace ConvenienceStoreApp
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(898, 216);
+            this.label5.Location = new System.Drawing.Point(891, 134);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 20);
             this.label5.TabIndex = 50;
@@ -188,7 +198,7 @@ namespace ConvenienceStoreApp
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(875, 266);
+            this.label7.Location = new System.Drawing.Point(868, 184);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(88, 20);
             this.label7.TabIndex = 52;
@@ -197,7 +207,7 @@ namespace ConvenienceStoreApp
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(895, 318);
+            this.label8.Location = new System.Drawing.Point(888, 236);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(68, 20);
             this.label8.TabIndex = 53;
@@ -205,74 +215,89 @@ namespace ConvenienceStoreApp
             // 
             // txtProductID
             // 
-            this.txtProductID.Location = new System.Drawing.Point(706, 213);
+            this.txtProductID.Location = new System.Drawing.Point(699, 131);
             this.txtProductID.Name = "txtProductID";
             this.txtProductID.Size = new System.Drawing.Size(148, 27);
             this.txtProductID.TabIndex = 54;
             // 
             // txtProductName
             // 
-            this.txtProductName.Location = new System.Drawing.Point(706, 263);
+            this.txtProductName.Location = new System.Drawing.Point(699, 181);
             this.txtProductName.Name = "txtProductName";
             this.txtProductName.Size = new System.Drawing.Size(148, 27);
             this.txtProductName.TabIndex = 55;
             // 
             // txtPrice
             // 
-            this.txtPrice.Location = new System.Drawing.Point(706, 315);
+            this.txtPrice.Location = new System.Drawing.Point(699, 233);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(148, 27);
             this.txtPrice.TabIndex = 56;
             // 
             // txtQuantity
             // 
-            this.txtQuantity.Location = new System.Drawing.Point(969, 213);
+            this.txtQuantity.Location = new System.Drawing.Point(962, 131);
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.Size = new System.Drawing.Size(154, 27);
             this.txtQuantity.TabIndex = 57;
             // 
-            // txtCategoryID
-            // 
-            this.txtCategoryID.Location = new System.Drawing.Point(969, 263);
-            this.txtCategoryID.Name = "txtCategoryID";
-            this.txtCategoryID.Size = new System.Drawing.Size(154, 27);
-            this.txtCategoryID.TabIndex = 59;
-            // 
-            // txtStatusID
-            // 
-            this.txtStatusID.Location = new System.Drawing.Point(969, 315);
-            this.txtStatusID.Name = "txtStatusID";
-            this.txtStatusID.Size = new System.Drawing.Size(154, 27);
-            this.txtStatusID.TabIndex = 60;
-            // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(716, 423);
+            this.btnAdd.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnAdd.ForeColor = System.Drawing.Color.White;
+            this.btnAdd.Location = new System.Drawing.Point(700, 279);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(94, 29);
+            this.btnAdd.Size = new System.Drawing.Size(94, 37);
             this.btnAdd.TabIndex = 61;
             this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(844, 423);
+            this.btnUpdate.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnUpdate.ForeColor = System.Drawing.Color.White;
+            this.btnUpdate.Location = new System.Drawing.Point(828, 279);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(94, 29);
+            this.btnUpdate.Size = new System.Drawing.Size(94, 37);
             this.btnUpdate.TabIndex = 62;
             this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // cboStatusID
+            // 
+            this.cboStatusID.FormattingEnabled = true;
+            this.cboStatusID.Items.AddRange(new object[] {
+            "Active",
+            "Available",
+            "CheckedOut",
+            "InActive"});
+            this.cboStatusID.Location = new System.Drawing.Point(965, 233);
+            this.cboStatusID.Name = "cboStatusID";
+            this.cboStatusID.Size = new System.Drawing.Size(151, 28);
+            this.cboStatusID.TabIndex = 63;
+            // 
+            // cboCategoryID
+            // 
+            this.cboCategoryID.FormattingEnabled = true;
+            this.cboCategoryID.Items.AddRange(new object[] {
+            "1. Drinks",
+            "2. Food",
+            "3. Electronics"});
+            this.cboCategoryID.Location = new System.Drawing.Point(962, 181);
+            this.cboCategoryID.Name = "cboCategoryID";
+            this.cboCategoryID.Size = new System.Drawing.Size(154, 28);
+            this.cboCategoryID.TabIndex = 64;
             // 
             // ucProductManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cboCategoryID);
+            this.Controls.Add(this.cboStatusID);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.txtStatusID);
-            this.Controls.Add(this.txtCategoryID);
             this.Controls.Add(this.txtQuantity);
             this.Controls.Add(this.txtPrice);
             this.Controls.Add(this.txtProductName);
@@ -322,9 +347,9 @@ namespace ConvenienceStoreApp
         private System.Windows.Forms.TextBox txtProductName;
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.TextBox txtQuantity;
-        private System.Windows.Forms.TextBox txtCategoryID;
-        private System.Windows.Forms.TextBox txtStatusID;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.ComboBox cboStatusID;
+        private System.Windows.Forms.ComboBox cboCategoryID;
     }
 }

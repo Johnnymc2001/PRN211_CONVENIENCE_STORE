@@ -34,7 +34,7 @@ namespace ConvenienceStoreApp
             // 
             // ucStaffManagement1
             // 
-            this.ucStaffManagement1.Location = new System.Drawing.Point(0, -5);
+            this.ucStaffManagement1.Location = new System.Drawing.Point(0, -4);
             this.ucStaffManagement1.Name = "ucStaffManagement1";
             this.ucStaffManagement1.Size = new System.Drawing.Size(1550, 924);
             this.ucStaffManagement1.TabIndex = 0;

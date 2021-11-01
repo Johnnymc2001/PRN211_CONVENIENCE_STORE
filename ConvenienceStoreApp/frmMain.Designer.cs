@@ -59,9 +59,9 @@ namespace ConvenienceStoreApp
             this.button2 = new System.Windows.Forms.Button();
             this.orderManagement1 = new ConvenienceStoreApp.OrderManagement();
             this.ucOrder1 = new ConvenienceStoreApp.ucOrder();
-            this.ucProductManagement1 = new ConvenienceStoreApp.ucProductManagement();
             this.ucSelfOrdersView1 = new ConvenienceStoreApp.ucSelfOrdersView();
             this.ucStaffManagement1 = new ConvenienceStoreApp.ucStaffManagement();
+            this.ucProductManagement1 = new ConvenienceStoreApp.ucProductManagement();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -431,13 +431,6 @@ namespace ConvenienceStoreApp
             this.ucOrder1.Size = new System.Drawing.Size(1240, 739);
             this.ucOrder1.TabIndex = 9;
             // 
-            // ucProductManagement1
-            // 
-            this.ucProductManagement1.Location = new System.Drawing.Point(246, 221);
-            this.ucProductManagement1.Name = "ucProductManagement1";
-            this.ucProductManagement1.Size = new System.Drawing.Size(1240, 739);
-            this.ucProductManagement1.TabIndex = 10;
-            // 
             // ucSelfOrdersView1
             // 
             this.ucSelfOrdersView1.BackColor = System.Drawing.SystemColors.ControlLightLight;
@@ -455,15 +448,22 @@ namespace ConvenienceStoreApp
             this.ucStaffManagement1.Size = new System.Drawing.Size(1550, 924);
             this.ucStaffManagement1.TabIndex = 12;
             // 
+            // ucProductManagement1
+            // 
+            this.ucProductManagement1.Location = new System.Drawing.Point(246, 221);
+            this.ucProductManagement1.Name = "ucProductManagement1";
+            this.ucProductManagement1.Size = new System.Drawing.Size(1550, 924);
+            this.ucProductManagement1.TabIndex = 13;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.ClientSize = new System.Drawing.Size(1486, 960);
+            this.Controls.Add(this.ucProductManagement1);
             this.Controls.Add(this.ucStaffManagement1);
             this.Controls.Add(this.ucSelfOrdersView1);
-            this.Controls.Add(this.ucProductManagement1);
             this.Controls.Add(this.ucOrder1);
             this.Controls.Add(this.orderManagement1);
             this.Controls.Add(this.panel5);
@@ -520,9 +520,9 @@ namespace ConvenienceStoreApp
         private System.Windows.Forms.Panel panel8;
         private OrderManagement orderManagement1;
         private ucOrder ucOrder1;
-        private ucProductManagement ucProductManagement1;
         private ucSelfOrdersView ucSelfOrdersView1;
         private ucStaffManagement ucStaffManagement1;
+        private ucProductManagement ucProductManagement1;
     }
 }
 

@@ -43,9 +43,11 @@ namespace ConvenienceStoreApp
         public void LoadStaffList()
         {
             List<TblStaff> staffs = null;
+            List<TblStaff> staffsSorted = null;
+            int ParseResult;
             try
             {
-                staffs = repoStaff.GetAllStaff();
+                staffs = repoStaff.GetAllStaff().OrderBy(staff => staff.StaffId).ToList();
 
                 source = new BindingSource();
                 source.DataSource = staffs;
@@ -214,7 +216,11 @@ namespace ConvenienceStoreApp
                     Regex emailRegex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
                     Match match = emailRegex.Match(txtEmail.Text.Trim());
 
-                    if (!Regex.IsMatch(txtFullname.Text.Trim(), @"^[a-zA-Z ]+$"))
+                    if (repoStaff.GetStaffByID(txtStaffID.Text.Trim()) != null && txtStaffID.Enabled)
+                    {
+                        MessageBox.Show("ID already exist", "Input error", MessageBoxButtons.OK);
+                    }
+                    else if (!Regex.IsMatch(txtFullname.Text.Trim(), @"^[a-zA-Z ]+$"))
                     {
                         MessageBox.Show("Invalid name input", "Input error", MessageBoxButtons.OK);
                     } else if (!int.TryParse(txtPhoneNumber.Text.Trim(), out parseValue) || txtPhoneNumber.Text.Trim().Length != 10)
