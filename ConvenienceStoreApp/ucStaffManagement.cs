@@ -44,7 +44,6 @@ namespace ConvenienceStoreApp
         {
             List<TblStaff> staffs = null;
             List<TblStaff> staffsSorted = null;
-            int ParseResult;
             try
             {
                 staffs = repoStaff.GetAllStaff().OrderBy(staff => staff.StaffId).ToList();
