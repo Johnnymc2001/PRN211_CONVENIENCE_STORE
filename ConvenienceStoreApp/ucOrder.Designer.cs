@@ -47,6 +47,9 @@ namespace ConvenienceStoreApp
             this.rtbAction = new System.Windows.Forms.RichTextBox();
             this.txtCustomerName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cboPaymentMethod = new System.Windows.Forms.ComboBox();
+            this.cboCategory = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
@@ -61,7 +64,7 @@ namespace ConvenienceStoreApp
             this.dgvOrderDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOrderDetails.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvOrderDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvOrderDetails.Location = new System.Drawing.Point(744, 34);
+            this.dgvOrderDetails.Location = new System.Drawing.Point(744, 84);
             this.dgvOrderDetails.MultiSelect = false;
             this.dgvOrderDetails.Name = "dgvOrderDetails";
             this.dgvOrderDetails.ReadOnly = true;
@@ -69,7 +72,7 @@ namespace ConvenienceStoreApp
             this.dgvOrderDetails.RowHeadersVisible = false;
             this.dgvOrderDetails.RowTemplate.Height = 25;
             this.dgvOrderDetails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrderDetails.Size = new System.Drawing.Size(338, 351);
+            this.dgvOrderDetails.Size = new System.Drawing.Size(338, 301);
             this.dgvOrderDetails.TabIndex = 0;
             this.dgvOrderDetails.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrderDetails_CellContentDoubleClick);
             // 
@@ -151,7 +154,8 @@ namespace ConvenienceStoreApp
             // 
             this.txtSearch.Location = new System.Drawing.Point(104, 84);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(484, 23);
+            this.txtSearch.PlaceholderText = "Product Name";
+            this.txtSearch.Size = new System.Drawing.Size(246, 23);
             this.txtSearch.TabIndex = 8;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
@@ -242,7 +246,7 @@ namespace ConvenienceStoreApp
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(744, 10);
+            this.label2.Location = new System.Drawing.Point(744, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 21);
             this.label2.TabIndex = 16;
@@ -262,7 +266,7 @@ namespace ConvenienceStoreApp
             // 
             // txtCustomerName
             // 
-            this.txtCustomerName.Location = new System.Drawing.Point(104, 52);
+            this.txtCustomerName.Location = new System.Drawing.Point(902, 10);
             this.txtCustomerName.Name = "txtCustomerName";
             this.txtCustomerName.Size = new System.Drawing.Size(180, 23);
             this.txtCustomerName.TabIndex = 18;
@@ -270,17 +274,51 @@ namespace ConvenienceStoreApp
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 55);
+            this.label3.Location = new System.Drawing.Point(744, 13);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(94, 15);
             this.label3.TabIndex = 19;
             this.label3.Text = "Customer Name";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(744, 42);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(99, 15);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Payment Method";
+            // 
+            // cboPaymentMethod
+            // 
+            this.cboPaymentMethod.FormattingEnabled = true;
+            this.cboPaymentMethod.Items.AddRange(new object[] {
+            "Cash",
+            "Online"});
+            this.cboPaymentMethod.Location = new System.Drawing.Point(902, 39);
+            this.cboPaymentMethod.Name = "cboPaymentMethod";
+            this.cboPaymentMethod.Size = new System.Drawing.Size(180, 23);
+            this.cboPaymentMethod.TabIndex = 21;
+            // 
+            // cboCategory
+            // 
+            this.cboCategory.FormattingEnabled = true;
+            this.cboCategory.Items.AddRange(new object[] {
+            "All"});
+            this.cboCategory.Location = new System.Drawing.Point(356, 84);
+            this.cboCategory.Name = "cboCategory";
+            this.cboCategory.Size = new System.Drawing.Size(209, 23);
+            this.cboCategory.TabIndex = 22;
+            this.cboCategory.SelectedIndexChanged += new System.EventHandler(this.cboCategory_SelectedIndexChanged);
             // 
             // ucOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Controls.Add(this.cboCategory);
+            this.Controls.Add(this.cboPaymentMethod);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtCustomerName);
             this.Controls.Add(this.rtbAction);
@@ -330,5 +368,8 @@ namespace ConvenienceStoreApp
         private System.Windows.Forms.RichTextBox rtbAction;
         private System.Windows.Forms.TextBox txtCustomerName;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cboPaymentMethod;
+        private System.Windows.Forms.ComboBox cboCategory;
     }
 }
