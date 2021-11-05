@@ -11,8 +11,6 @@ namespace DataAccess.Repository
     {
         public void Add(TblStaff staff) => StaffDAO.Instance.Add(staff);
 
-        public void Delete(TblStaff staff) => StaffDAO.Instance.Delete(staff);
-
         public List<TblStaff> GetAllStaff() => StaffDAO.Instance.GetAll();
 
         public TblStaff GetStaffByID(string staffId) => StaffDAO.Instance.GetByID(staffId);

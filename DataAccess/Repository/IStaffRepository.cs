@@ -15,9 +15,7 @@ namespace DataAccess.Repository
         TblStaff GetStaffByID(string staffId);
 
         void Add(TblStaff staff);
-
-        void Delete(TblStaff staff);
-
+        
         void Update(TblStaff staff);
 
         TblStaff Login(string Email, string Password);
