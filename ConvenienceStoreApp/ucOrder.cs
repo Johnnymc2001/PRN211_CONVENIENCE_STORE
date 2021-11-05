@@ -102,22 +102,30 @@ namespace ConvenienceStoreApp
         //----------------------------------OrderDetail---------------------------------------------------
         private void RefreshOrderLocal()
         {
-            double total = CalculateTotal();
+            try
+            {
+                double total = CalculateTotal();
+                UpdateGridViewOrder(orderDetails);
+            }
+            catch
+            {
+                return;
+            }
 
-            UpdateGridViewOrder(orderDetails);
+
+
 
         }
         int? oldIndex = null;
 
         private void UpdateGridViewOrder(List<TblOrderDetail> orderDetails)
         {
-            try
+            using (var row = dgvOrderDetails.CurrentRow)
             {
-                oldIndex = dgvOrderDetails.CurrentRow.Index;
-            }
-            catch (Exception)
-            {
-
+                if (row != null)
+                {
+                    oldIndex = row.Index;
+                }
             }
 
             List<DataGridViewOrderDetailObject> listObj = orderDetails
@@ -132,15 +140,14 @@ namespace ConvenienceStoreApp
             dgvOrderDetails.DataSource = listObj;
             dgvOrderDetails.ClearSelection();
 
-            if (oldIndex != null && oldIndex >= 0)
+            if (oldIndex != null && oldIndex >= 0 && orderDetails.Count > 0)
             {
-                try
+                using (var row = dgvOrderDetails.Rows[(int)oldIndex])
                 {
-                    dgvOrderDetails.CurrentCell = dgvOrderDetails.Rows[(int)oldIndex].Cells[0];
-                }
-                catch (ArgumentOutOfRangeException)
-                {
-                    // No Need To Do Anything
+                    if (row != null)
+                    {
+                        dgvOrderDetails.CurrentCell = row.Cells[0];
+                    }
                 }
             }
         }
@@ -149,7 +156,10 @@ namespace ConvenienceStoreApp
         private double CalculateTotal()
         {
             double total = 0;
-            orderDetails.ForEach(od => total += (double)od.TotalPrice);
+            if (orderDetails.Count > 0)
+            {
+                orderDetails.ForEach(od => total += (double)od.TotalPrice);
+            }
             lblTotalPrice.Text = total.ToString();
             return total;
         }
@@ -218,10 +228,11 @@ namespace ConvenienceStoreApp
             TblProduct product = null;
             try
             {
-                Object obj = dgvProducts.CurrentRow.DataBoundItem;
+                var obj = dgvProducts.CurrentRow;
                 if (null != obj)
                 {
-                    DataGridViewProductObject dataObj = (DataGridViewProductObject)obj;
+                    var row = obj.DataBoundItem;
+                    DataGridViewProductObject dataObj = (DataGridViewProductObject)row;
                     product = products.SingleOrDefault(p => p.ProductId.Equals(dataObj.ProductId));
                 }
             }
@@ -237,10 +248,11 @@ namespace ConvenienceStoreApp
             TblOrderDetail orderDetail = null;
             try
             {
-                Object obj = dgvOrderDetails.CurrentRow.DataBoundItem;
+                var obj = dgvOrderDetails.CurrentRow;
                 if (null != obj)
                 {
-                    DataGridViewOrderDetailObject dataObj = (DataGridViewOrderDetailObject)obj;
+                    var row = obj.DataBoundItem;
+                    DataGridViewOrderDetailObject dataObj = (DataGridViewOrderDetailObject)row;
                     orderDetail = orderDetails.SingleOrDefault(o => o.ProductId.Equals(dataObj.ProductId));
                 }
             }
@@ -254,11 +266,13 @@ namespace ConvenienceStoreApp
         //-----------------------------------------------------------------------------------------------------
         private void TryAddProduct()
         {
-            TblProduct product = GetCurrentProduct();
-            int quantity = (int)txtQuantity.Value;
+
 
             try
             {
+                TblProduct product = GetCurrentProduct();
+                int quantity = (int)txtQuantity.Value;
+
                 // Get Product Successfully
                 if (product != null)
                 {
