@@ -274,7 +274,8 @@ namespace ConvenienceStoreApp
             this.cboStatusID.Enabled = false;
             this.cboStatusID.FormattingEnabled = true;
             this.cboStatusID.Items.AddRange(new object[] {
-            "Available"});
+            "Available",
+            "UnAvailable"});
             this.cboStatusID.Location = new System.Drawing.Point(962, 232);
             this.cboStatusID.Name = "cboStatusID";
             this.cboStatusID.Size = new System.Drawing.Size(151, 28);

@@ -31,6 +31,7 @@ namespace ConvenienceStoreApp
             {
                 LoadAllProductList();
                 cboSelect.SelectedIndex = 0;
+                cboCategoryID.SelectedIndex = 0;
 
                 txtProductID.Enabled = false;
                 txtProductID.ReadOnly = true;
@@ -340,6 +341,13 @@ namespace ConvenienceStoreApp
         {
             if (btnUpdate.Text.Equals("Update"))
             {
+                txtProductID.DataBindings.Clear();
+                txtProductName.DataBindings.Clear();
+                txtPrice.DataBindings.Clear();
+                txtQuantity.DataBindings.Clear();
+                cboCategoryID.DataBindings.Clear();
+                cboStatusID.DataBindings.Clear();
+
                 txtProductID.Enabled = false;
                 txtProductID.ReadOnly = true;
                 txtProductName.ReadOnly = false;
