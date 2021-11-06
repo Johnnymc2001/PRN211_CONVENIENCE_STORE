@@ -260,9 +260,7 @@ namespace ConvenienceStoreApp
                 btnAvailable.Enabled = false;
 
                 lbCate.Show();
-                lbStatus.Show();
                 cboCategoryID.Show();
-                cboStatusID.Show();
 
             }
             else if (btnAdd.Text.Equals("Save"))
@@ -369,9 +367,7 @@ namespace ConvenienceStoreApp
                 btnAvailable.Enabled = false;
 
                 lbCate.Show();
-                lbStatus.Show();
                 cboCategoryID.Show();
-                cboStatusID.Show();
             }
             else if(btnUpdate.Text.Equals("Cancel"))
             {
