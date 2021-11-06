@@ -329,6 +329,9 @@ namespace ConvenienceStoreApp
                             btnSearch.Enabled = true;
                             btnRefresh.Enabled = true;
                             btnAvailable.Enabled = true;
+
+                            lbCate.Hide();
+                            cboCategoryID.Hide();
                         }
                         catch (Exception ex)
                         {
