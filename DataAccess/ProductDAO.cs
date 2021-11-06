@@ -121,7 +121,12 @@ namespace DataAccess
             try
             {
                 using (var ctx = new prn211group4Context())
-                {   
+                {
+                    if (newProduct.Quantity == 0)
+                    {
+                        newProduct.StatusId = "OutOfStock";
+                    }
+
                     ctx.TblProducts.Add(newProduct);
                     ctx.SaveChanges();
                 }
@@ -136,7 +141,15 @@ namespace DataAccess
         {
             using (var ctx = new prn211group4Context())
             {
-                if (product.Quantity == 0) product.StatusId = "OutOfStock";
+                if (product.Quantity == 0)
+                {
+                    product.StatusId = "OutOfStock";
+                }
+                else if (product.Quantity > 0 && product.StatusId == "OutOfStock")
+                {
+                    product.StatusId = "Available";
+                }
+
                 ctx.Entry(product).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 ctx.SaveChanges();
             }
