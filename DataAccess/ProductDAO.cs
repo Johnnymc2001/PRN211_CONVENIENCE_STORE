@@ -121,7 +121,7 @@ namespace DataAccess
             try
             {
                 using (var ctx = new prn211group4Context())
-                {
+                {   
                     ctx.TblProducts.Add(newProduct);
                     ctx.SaveChanges();
                 }
