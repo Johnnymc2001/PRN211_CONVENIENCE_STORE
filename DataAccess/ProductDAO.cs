@@ -136,6 +136,7 @@ namespace DataAccess
         {
             using (var ctx = new prn211group4Context())
             {
+                if (product.Quantity == 0) product.StatusId = "OutOfStock";
                 ctx.Entry(product).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 ctx.SaveChanges();
             }
