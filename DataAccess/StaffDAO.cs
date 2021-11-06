@@ -103,23 +103,6 @@ namespace DataAccess
             }
         }
 
-        // THIS IS DELETE STAFF
-
-        public void Delete(TblStaff staff)
-        {
-            try
-            {
-                using (var ctx = new prn211group4Context())
-                {
-                    ctx.TblStaffs.Remove(staff);
-                    ctx.SaveChanges();
-                }
-            } catch(Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
         // THIS IS UPDATE STAFF
 
         public void Update(TblStaff staff)
@@ -142,8 +125,8 @@ namespace DataAccess
         private TblStaff CurrentAccount { get; set; }
         public TblStaff GetCurrentAccount() => CurrentAccount;
 
-        public TblStaff Login(string Email, string Password)
-        {
+        public TblStaff Login(string Email, string Password) 
+        { 
             try
             {
                 TblStaff staff = null;
@@ -151,9 +134,13 @@ namespace DataAccess
                 {
                     staff = ctx.TblStaffs.SingleOrDefault(staff => staff.Email.Equals(Email) && staff.Password.Equals(Password));
                 }
+
                 if (staff != null)
                 {
                     CurrentAccount = staff;
+                } else
+                {
+                    CurrentAccount = null;
                 }
             }
             catch (Exception ex)

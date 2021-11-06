@@ -16,6 +16,18 @@ namespace ConvenienceStoreApp
 {
     public partial class ucStaffManagement : UserControl
     {
+        public class DataGridViewStaffObject
+        {
+            public string StaffId { get; set; }
+            public string FullName { get; set; }
+            public string Address { get; set; }
+            public string PhoneNumber { get; set; }
+            public string Password { get; set; }
+            public string RoleId { get; set; }
+            public string StatusId { get; set; }
+            public string Email { get; set; }
+        }
+
         public ucStaffManagement()
         {
             InitializeComponent();
@@ -43,13 +55,26 @@ namespace ConvenienceStoreApp
         public void LoadStaffList()
         {
             List<TblStaff> staffs = null;
-            List<TblStaff> staffsSorted = null;
+            List<DataGridViewStaffObject> staffsCut = new List<DataGridViewStaffObject>();
+
             try
             {
                 staffs = repoStaff.GetAllStaff().OrderBy(staff => staff.StaffId).ToList();
 
+                staffs.ForEach(staff => staffsCut.Add(new()
+                {
+                    FullName = staff.FullName,
+                    Address = staff.Address,
+                    Email = staff.Email,
+                    Password = staff.Password,
+                    PhoneNumber = staff.PhoneNumber,
+                    RoleId = staff.RoleId,
+                    StaffId = staff.StaffId,
+                    StatusId = staff.StatusId,
+                }));
+
                 source = new BindingSource();
-                source.DataSource = staffs;
+                source.DataSource = staffsCut;
 
                 txtStaffID.DataBindings.Clear();
                 txtFullname.DataBindings.Clear();
@@ -72,10 +97,11 @@ namespace ConvenienceStoreApp
                 dgvStaffList.DataSource = null;
                 dgvStaffList.DataSource = source;
 
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Load Staff List", MessageBoxButtons.OK);
-            } 
+            }
 
         }
 
@@ -84,7 +110,7 @@ namespace ConvenienceStoreApp
             string id = txtSearchStaffID.Text;
             string name = txtSearchStaffName.Text;
             TblStaff staff = null;
-            List<TblStaff> staffs = new List<TblStaff>(); 
+            List<TblStaff> staffs = new List<TblStaff>();
             try
             {
                 if (!id.Trim().Equals("") && !name.Trim().Equals(""))
@@ -125,21 +151,21 @@ namespace ConvenienceStoreApp
                     }
                     else
                     {
-                        if(staff != null)
+                        if (staff != null)
                         {
                             source = new BindingSource();
                             source.DataSource = staff;
                             dgvStaffList.DataSource = null;
                             dgvStaffList.DataSource = source;
                         }
-                        else if(staffs.Count > 0)
+                        else if (staffs.Count > 0)
                         {
                             source = new BindingSource();
                             source.DataSource = staffs;
                             dgvStaffList.DataSource = null;
                             dgvStaffList.DataSource = source;
                         }
-                       
+
                     }
                 }
                 else
@@ -203,7 +229,7 @@ namespace ConvenienceStoreApp
                 btnAdd.Text = "Save";
                 btnUpdate.Text = "Cancel";
             }
-            else if(btnAdd.Text == "Save")
+            else if (btnAdd.Text == "Save")
             {
                 if (txtStaffID.Text.Trim().Equals("") || txtFullname.Text.Trim().Equals("") || txtAddress.Text.Trim().Equals("") || txtPhoneNumber.Text.Trim().Equals("") || txtPassword.Text.Trim().Equals("") || txtEmail.Text.Trim().Equals(""))
                 {
@@ -222,13 +248,16 @@ namespace ConvenienceStoreApp
                     else if (!Regex.IsMatch(txtFullname.Text.Trim(), @"^[a-zA-Z ]+$"))
                     {
                         MessageBox.Show("Invalid name input", "Input error", MessageBoxButtons.OK);
-                    } else if (!int.TryParse(txtPhoneNumber.Text.Trim(), out parseValue) || txtPhoneNumber.Text.Trim().Length != 10)
+                    }
+                    else if (!int.TryParse(txtPhoneNumber.Text.Trim(), out parseValue) || txtPhoneNumber.Text.Trim().Length != 10)
                     {
                         MessageBox.Show("Invalid phone number input", "Input error", MessageBoxButtons.OK);
-                    } else if (txtPassword.Text.Length < 6)
+                    }
+                    else if (txtPassword.Text.Length < 6)
                     {
                         MessageBox.Show("Password too weak. Please enter more than 6 character !", "Input error", MessageBoxButtons.OK);
-                    } else if (!match.Success)
+                    }
+                    else if (!match.Success)
                     {
                         MessageBox.Show("Invalid email", "Input error", MessageBoxButtons.OK);
                     }
@@ -289,7 +318,7 @@ namespace ConvenienceStoreApp
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if(btnUpdate.Text == "Update")
+            if (btnUpdate.Text == "Update")
             {
                 btnRefresh.Enabled = false;
                 btnSearch.Enabled = false;
@@ -308,7 +337,7 @@ namespace ConvenienceStoreApp
                 btnAdd.Text = "Save";
                 btnUpdate.Text = "Cancel";
             }
-            else if(btnUpdate.Text == "Cancel")
+            else if (btnUpdate.Text == "Cancel")
             {
                 btnRefresh.Enabled = true;
                 btnSearch.Enabled = true;

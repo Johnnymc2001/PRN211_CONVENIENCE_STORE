@@ -25,16 +25,19 @@ namespace ConvenienceStoreApp
             public string ProductName { get; set; }
             public int? Quantity { get; set; }
             public double? Price { get; set; }
+            public string Category { get; set; }
         }
 
         IOrderRepository orderRepository = new OrderRepository();
         IOrderDetailRepository orderDetailRepository = new OrderDetailRepository();
         IProductRepository productRepository = new ProductRepository();
         IStaffRepository staffRepository = new StaffRepository();
+        prn211group4Context context = new prn211group4Context();
 
         Guid orderId;
         List<TblOrderDetail> orderDetails = new List<TblOrderDetail>();
         List<TblProduct> products = new List<TblProduct>();
+        List<TblCategory> categories = new List<TblCategory>();
 
         public TblStaff loggedStaff { get; set; }
         //Dictionary<TblProduct, Int32> orderList = new Dictionary<TblProduct, Int32>();
@@ -58,10 +61,24 @@ namespace ConvenienceStoreApp
             UpdateGridViewProducts(showProducts);
         }
 
-        private void SearchProducts(string productName)
+        private void SearchProducts(string productName, string categoryValue)
         {
             List<TblProduct> searchResult = new List<TblProduct>();
-            searchResult = products.FindAll(prod => prod.ProductName.Contains(productName));
+            searchResult = products.FindAll(prod => prod.ProductName.Contains(productName, StringComparison.OrdinalIgnoreCase));
+
+            if (categoryValue != null && categoryValue != "ALL")
+            {
+                try
+                {
+                    string catId = context.TblCategories.SingleOrDefault(c => c.CategoryName == categoryValue).CategoryId;
+                    searchResult = searchResult.Where(p => p.CategoryId == catId).ToList();
+                }
+                catch
+                {
+
+                }
+            }
+
             UpdateGridViewProducts(searchResult);
         }
 
@@ -74,6 +91,8 @@ namespace ConvenienceStoreApp
                     ProductName = o.ProductName,
                     Quantity = o.Quantity,
                     Price = o.Price,
+                    Category = context.TblCategories.SingleOrDefault(c => c.CategoryId == o.CategoryId).CategoryName ?? "Undefined"
+
                 }).ToList();
 
             dgvProducts.DataSource = null;
@@ -83,22 +102,30 @@ namespace ConvenienceStoreApp
         //----------------------------------OrderDetail---------------------------------------------------
         private void RefreshOrderLocal()
         {
-            double total = CalculateTotal();
+            try
+            {
+                double total = CalculateTotal();
+                UpdateGridViewOrder(orderDetails);
+            }
+            catch
+            {
+                return;
+            }
 
-            UpdateGridViewOrder(orderDetails);
+
+
 
         }
         int? oldIndex = null;
 
         private void UpdateGridViewOrder(List<TblOrderDetail> orderDetails)
         {
-            try
+            using (var row = dgvOrderDetails.CurrentRow)
             {
-                oldIndex = dgvOrderDetails.CurrentRow.Index;
-            }
-            catch (Exception)
-            {
-
+                if (row != null)
+                {
+                    oldIndex = row.Index;
+                }
             }
 
             List<DataGridViewOrderDetailObject> listObj = orderDetails
@@ -113,15 +140,14 @@ namespace ConvenienceStoreApp
             dgvOrderDetails.DataSource = listObj;
             dgvOrderDetails.ClearSelection();
 
-            if (oldIndex != null && oldIndex >= 0)
+            if (oldIndex != null && oldIndex >= 0 && orderDetails.Count > 0)
             {
-                try
+                using (var row = dgvOrderDetails.Rows[(int)oldIndex])
                 {
-                    dgvOrderDetails.CurrentCell = dgvOrderDetails.Rows[(int)oldIndex].Cells[0];
-                }
-                catch (ArgumentOutOfRangeException)
-                {
-                    // No Need To Do Anything
+                    if (row != null)
+                    {
+                        dgvOrderDetails.CurrentCell = row.Cells[0];
+                    }
                 }
             }
         }
@@ -130,7 +156,10 @@ namespace ConvenienceStoreApp
         private double CalculateTotal()
         {
             double total = 0;
-            orderDetails.ForEach(od => total += (double)od.TotalPrice);
+            if (orderDetails.Count > 0)
+            {
+                orderDetails.ForEach(od => total += (double)od.TotalPrice);
+            }
             lblTotalPrice.Text = total.ToString();
             return total;
         }
@@ -153,6 +182,10 @@ namespace ConvenienceStoreApp
             {
                 orderId = Guid.NewGuid();
             }
+
+            cboPaymentMethod.SelectedIndex = 0;
+            categories = context.TblCategories.ToList<TblCategory>();
+            categories.ForEach(cat => cboCategory.Items.Add(cat.CategoryName));
 
             lblOrderId.Text = $"Order Id: {orderId.ToString()}";
             rtbAction.Text = $"New Order";
@@ -195,10 +228,11 @@ namespace ConvenienceStoreApp
             TblProduct product = null;
             try
             {
-                Object obj = dgvProducts.CurrentRow.DataBoundItem;
+                var obj = dgvProducts.CurrentRow;
                 if (null != obj)
                 {
-                    DataGridViewProductObject dataObj = (DataGridViewProductObject)obj;
+                    var row = obj.DataBoundItem;
+                    DataGridViewProductObject dataObj = (DataGridViewProductObject)row;
                     product = products.SingleOrDefault(p => p.ProductId.Equals(dataObj.ProductId));
                 }
             }
@@ -214,10 +248,11 @@ namespace ConvenienceStoreApp
             TblOrderDetail orderDetail = null;
             try
             {
-                Object obj = dgvOrderDetails.CurrentRow.DataBoundItem;
+                var obj = dgvOrderDetails.CurrentRow;
                 if (null != obj)
                 {
-                    DataGridViewOrderDetailObject dataObj = (DataGridViewOrderDetailObject)obj;
+                    var row = obj.DataBoundItem;
+                    DataGridViewOrderDetailObject dataObj = (DataGridViewOrderDetailObject)row;
                     orderDetail = orderDetails.SingleOrDefault(o => o.ProductId.Equals(dataObj.ProductId));
                 }
             }
@@ -231,11 +266,13 @@ namespace ConvenienceStoreApp
         //-----------------------------------------------------------------------------------------------------
         private void TryAddProduct()
         {
-            TblProduct product = GetCurrentProduct();
-            int quantity = (int)txtQuantity.Value;
+
 
             try
             {
+                TblProduct product = GetCurrentProduct();
+                int quantity = (int)txtQuantity.Value;
+
                 // Get Product Successfully
                 if (product != null)
                 {
@@ -334,16 +371,6 @@ namespace ConvenienceStoreApp
             RefreshProductDatabase();
         }
 
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            String searchValue = txtSearch.Text;
-            if (null != searchValue)
-            {
-                SearchProducts(searchValue);
-            }
-
-        }
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
             TryAddProduct();
@@ -407,6 +434,8 @@ namespace ConvenienceStoreApp
 
         private void btnCheckout_Click(object sender, EventArgs e)
         {
+            string paymentMethod = (string)(cboPaymentMethod.SelectedItem ?? "Cash");
+
             DialogResult f = MessageBox.Show("Do you want to checkout", "Checkout", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (f == DialogResult.OK)
             {
@@ -434,6 +463,7 @@ namespace ConvenienceStoreApp
                             Date = DateTime.Now,
                             OrderPrice = CalculateTotal(),
                             StatusId = "CheckedOut",
+                            PaymentMethod = paymentMethod,
                         };
 
                         orderRepository.Add(checkoutOrder);
@@ -469,7 +499,8 @@ namespace ConvenienceStoreApp
                         MessageBox.Show($"You must first add item before checkout!", "Order - Checkout", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     ChangeButtonState();
-                } else
+                }
+                else
                 {
                     // Database unsycned
                     MessageBox.Show($"Products is not enough under database!", "Order - Checkout", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -479,10 +510,11 @@ namespace ConvenienceStoreApp
                         TblProduct prod = products.Single(p => p.ProductId == od.ProductId);
                         if (od.Quantity > prod.Quantity)
                         {
-                            if (((int) prod.Quantity) == 0)
+                            if (((int)prod.Quantity) == 0)
                             {
                                 orderDetails.RemoveAll(odTotalPrice => od.ProductId == prod.ProductId);
-                            } else
+                            }
+                            else
                             {
                                 od.Quantity = prod.Quantity;
                             }
@@ -504,6 +536,20 @@ namespace ConvenienceStoreApp
         private void dgvOrderDetails_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             TryRemoveOrderDetail();
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            String searchValue = txtSearch.Text;
+            String categoryValue = (string)cboCategory.SelectedItem ?? "ALL";
+            SearchProducts(searchValue, categoryValue);
+
+        }
+        private void cboCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            String searchValue = txtSearch.Text ?? "";
+            String categoryValue = (string)cboCategory.SelectedItem ?? "ALL";
+            SearchProducts(searchValue, categoryValue);
         }
     }
 }

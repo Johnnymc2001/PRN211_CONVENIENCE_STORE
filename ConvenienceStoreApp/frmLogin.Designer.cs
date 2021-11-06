@@ -114,7 +114,7 @@ namespace ConvenienceStoreApp
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(21, 60);
+            this.label2.Location = new System.Drawing.Point(21, 55);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(263, 33);
             this.label2.TabIndex = 9;
@@ -127,7 +127,7 @@ namespace ConvenienceStoreApp
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.label3.Location = new System.Drawing.Point(74, 27);
+            this.label3.Location = new System.Drawing.Point(74, 23);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(154, 33);
             this.label3.TabIndex = 8;
