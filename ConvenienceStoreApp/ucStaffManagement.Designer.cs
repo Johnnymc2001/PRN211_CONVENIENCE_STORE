@@ -98,6 +98,8 @@ namespace ConvenienceStoreApp
             // 
             this.dgvStaffList.AllowUserToAddRows = false;
             this.dgvStaffList.AllowUserToDeleteRows = false;
+            this.dgvStaffList.AllowUserToResizeColumns = false;
+            this.dgvStaffList.AllowUserToResizeRows = false;
             this.dgvStaffList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvStaffList.BackgroundColor = System.Drawing.Color.White;
             this.dgvStaffList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
