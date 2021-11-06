@@ -97,6 +97,10 @@ namespace ConvenienceStoreApp
             // 
             // dgvDetails
             // 
+            this.dgvDetails.AllowUserToAddRows = false;
+            this.dgvDetails.AllowUserToDeleteRows = false;
+            this.dgvDetails.AllowUserToResizeColumns = false;
+            this.dgvDetails.AllowUserToResizeRows = false;
             this.dgvDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDetails.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -212,6 +216,9 @@ namespace ConvenienceStoreApp
             this.Controls.Add(this.lbOrderDate);
             this.Controls.Add(this.lbStaffID);
             this.Controls.Add(this.lbOrderID);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "OrderInfo";
             this.Text = "OrderInfo";
             this.Load += new System.EventHandler(this.OrderInfo_Load);

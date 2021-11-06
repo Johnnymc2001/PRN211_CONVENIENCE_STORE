@@ -42,7 +42,6 @@ namespace ConvenienceStoreApp
                 List<object> viewOrderList = new List<object>();
                 listOrderDetail.ForEach(orderDetail => viewOrderList.Add(new
                 {
-                    OrderID = orderDetail.OrderId,
                     ProductID = orderDetail.ProductId,
                     Quantity = orderDetail.Quantity,
                     TotalPrice = orderDetail.TotalPrice

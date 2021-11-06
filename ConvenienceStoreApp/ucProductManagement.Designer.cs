@@ -107,6 +107,7 @@ namespace ConvenienceStoreApp
             // 
             // cboSelect
             // 
+            this.cboSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSelect.FormattingEnabled = true;
             this.cboSelect.Items.AddRange(new object[] {
             "Product ID",
@@ -280,13 +281,12 @@ namespace ConvenienceStoreApp
             // 
             // cboStatusID
             // 
+            this.cboStatusID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboStatusID.Enabled = false;
             this.cboStatusID.FormattingEnabled = true;
             this.cboStatusID.Items.AddRange(new object[] {
-            "Active",
-            "Available",
-            "CheckedOut",
-            "InActive"});
-            this.cboStatusID.Location = new System.Drawing.Point(844, 175);
+            "Available"});
+            this.cboStatusID.Location = new System.Drawing.Point(842, 174);
             this.cboStatusID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboStatusID.Name = "cboStatusID";
             this.cboStatusID.Size = new System.Drawing.Size(133, 23);
@@ -294,6 +294,7 @@ namespace ConvenienceStoreApp
             // 
             // cboCategoryID
             // 
+            this.cboCategoryID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCategoryID.FormattingEnabled = true;
             this.cboCategoryID.Items.AddRange(new object[] {
             "1. Drinks",

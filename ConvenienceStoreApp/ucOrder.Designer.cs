@@ -305,6 +305,7 @@ namespace ConvenienceStoreApp
             this.cboPaymentMethod.Name = "cboPaymentMethod";
             this.cboPaymentMethod.Size = new System.Drawing.Size(180, 23);
             this.cboPaymentMethod.TabIndex = 21;
+            this.cboPaymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             // 
             // cboCategory
             // 

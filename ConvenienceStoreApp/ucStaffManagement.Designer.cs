@@ -308,10 +308,10 @@ namespace ConvenienceStoreApp
             // 
             this.btnRefresh.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
-            this.btnRefresh.Location = new System.Drawing.Point(16, 255);
+            this.btnRefresh.Location = new System.Drawing.Point(16, 250);
             this.btnRefresh.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(82, 22);
+            this.btnRefresh.Size = new System.Drawing.Size(82, 26);
             this.btnRefresh.TabIndex = 39;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = false;
@@ -319,6 +319,7 @@ namespace ConvenienceStoreApp
             // 
             // cboRoleID
             // 
+            this.cboRoleID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboRoleID.FormattingEnabled = true;
             this.cboRoleID.Items.AddRange(new object[] {
             "AD",
@@ -331,6 +332,7 @@ namespace ConvenienceStoreApp
             // 
             // cboStatusID
             // 
+            this.cboStatusID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboStatusID.FormattingEnabled = true;
             this.cboStatusID.Items.AddRange(new object[] {
             "Active",
