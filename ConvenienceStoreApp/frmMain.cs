@@ -65,12 +65,6 @@ namespace ConvenienceStoreApp
             ucProductManagement1.Show();
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            HideUC();
-            HlightBtn(4);
-
-        }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
@@ -147,7 +141,6 @@ namespace ConvenienceStoreApp
                         hlightBtn1.Visible = true;
                         hlightBtn2.Visible = false;
                         hlightBtn3.Visible = false;
-                        hlightBtn4.Visible = false;
                         hlightBtn5.Visible = false;
                         HideUC();
 
@@ -156,7 +149,6 @@ namespace ConvenienceStoreApp
                         hlightBtn1.Visible = false;
                         hlightBtn2.Visible = true;
                         hlightBtn3.Visible = false;
-                        hlightBtn4.Visible = false;
                         hlightBtn5.Visible = false;
                         HideUC();
 
@@ -165,16 +157,6 @@ namespace ConvenienceStoreApp
                         hlightBtn1.Visible = false;
                         hlightBtn2.Visible = false;
                         hlightBtn3.Visible = true;
-                        hlightBtn4.Visible = false;
-                        hlightBtn5.Visible = false;
-                        HideUC();
-
-                        break;
-                    case 4:
-                        hlightBtn1.Visible = false;
-                        hlightBtn2.Visible = false;
-                        hlightBtn3.Visible = false;
-                        hlightBtn4.Visible = true;
                         hlightBtn5.Visible = false;
                         HideUC();
 
@@ -183,7 +165,6 @@ namespace ConvenienceStoreApp
                         hlightBtn1.Visible = false;
                         hlightBtn2.Visible = false;
                         hlightBtn3.Visible = false;
-                        hlightBtn4.Visible = false;
                         hlightBtn5.Visible = true;
                         HideUC();
 
@@ -230,17 +211,6 @@ namespace ConvenienceStoreApp
             }
         }
 
-        private void button4_MouseMove(object sender, MouseEventArgs e)
-        {
-            hlightBtn4.Visible = true;
-        }
-        private void button4_MouseLeave(object sender, EventArgs e)
-        {
-            if (clickedBtn != 4)
-            {
-                hlightBtn4.Visible = false;
-            }
-        }
 
         private void button5_MouseMove(object sender, MouseEventArgs e)
         {

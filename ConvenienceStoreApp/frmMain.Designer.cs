@@ -48,13 +48,10 @@ namespace ConvenienceStoreApp
             this.hlightBtn5 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
             this.btnLogout = new System.Windows.Forms.Button();
-            this.hlightBtn4 = new System.Windows.Forms.Panel();
-            this.panel11 = new System.Windows.Forms.Panel();
             this.hlightBtn3 = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.hlightBtn2 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.orderManagement1 = new ConvenienceStoreApp.OrderManagement();
@@ -69,7 +66,6 @@ namespace ConvenienceStoreApp
             this.hlightBtn1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.hlightBtn5.SuspendLayout();
-            this.hlightBtn4.SuspendLayout();
             this.hlightBtn3.SuspendLayout();
             this.hlightBtn2.SuspendLayout();
             this.SuspendLayout();
@@ -242,10 +238,8 @@ namespace ConvenienceStoreApp
             this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
             this.panel1.Controls.Add(this.hlightBtn5);
             this.panel1.Controls.Add(this.btnLogout);
-            this.panel1.Controls.Add(this.hlightBtn4);
             this.panel1.Controls.Add(this.hlightBtn3);
             this.panel1.Controls.Add(this.hlightBtn2);
-            this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.hlightBtn1);
@@ -291,24 +285,6 @@ namespace ConvenienceStoreApp
             this.btnLogout.MouseLeave += new System.EventHandler(this.button5_MouseLeave);
             this.btnLogout.MouseMove += new System.Windows.Forms.MouseEventHandler(this.button5_MouseMove);
             // 
-            // hlightBtn4
-            // 
-            this.hlightBtn4.BackColor = System.Drawing.Color.White;
-            this.hlightBtn4.Controls.Add(this.panel11);
-            this.hlightBtn4.Location = new System.Drawing.Point(0, 584);
-            this.hlightBtn4.Name = "hlightBtn4";
-            this.hlightBtn4.Size = new System.Drawing.Size(14, 59);
-            this.hlightBtn4.TabIndex = 7;
-            this.hlightBtn4.Visible = false;
-            // 
-            // panel11
-            // 
-            this.panel11.BackColor = System.Drawing.Color.White;
-            this.panel11.Location = new System.Drawing.Point(-97, 0);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(21, 59);
-            this.panel11.TabIndex = 4;
-            // 
             // hlightBtn3
             // 
             this.hlightBtn3.BackColor = System.Drawing.Color.White;
@@ -344,22 +320,6 @@ namespace ConvenienceStoreApp
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(21, 59);
             this.panel7.TabIndex = 4;
-            // 
-            // button4
-            // 
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(12, 584);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(200, 59);
-            this.button4.TabIndex = 6;
-            this.button4.Text = "About Us";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            this.button4.MouseLeave += new System.EventHandler(this.button4_MouseLeave);
-            this.button4.MouseMove += new System.Windows.Forms.MouseEventHandler(this.button4_MouseMove);
             // 
             // button3
             // 
@@ -464,7 +424,6 @@ namespace ConvenienceStoreApp
             this.hlightBtn1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.hlightBtn5.ResumeLayout(false);
-            this.hlightBtn4.ResumeLayout(false);
             this.hlightBtn3.ResumeLayout(false);
             this.hlightBtn2.ResumeLayout(false);
             this.ResumeLayout(false);

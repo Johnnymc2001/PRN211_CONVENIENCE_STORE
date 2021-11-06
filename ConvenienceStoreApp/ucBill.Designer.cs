@@ -82,6 +82,10 @@ namespace ConvenienceStoreApp
             // 
             // dgvOrderDetails
             // 
+            this.dgvOrderDetails.AllowUserToAddRows = false;
+            this.dgvOrderDetails.AllowUserToDeleteRows = false;
+            this.dgvOrderDetails.AllowUserToResizeColumns = false;
+            this.dgvOrderDetails.AllowUserToResizeRows = false;
             this.dgvOrderDetails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOrderDetails.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvOrderDetails.BorderStyle = System.Windows.Forms.BorderStyle.None;
