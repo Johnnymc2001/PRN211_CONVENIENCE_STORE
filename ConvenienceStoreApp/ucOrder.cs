@@ -63,23 +63,23 @@ namespace ConvenienceStoreApp
 
         private void SearchProducts(string productName, string categoryValue)
         {
-            List<TblProduct> searchResult = new List<TblProduct>();
-            searchResult = products.FindAll(prod => prod.ProductName.Contains(productName, StringComparison.OrdinalIgnoreCase) && prod.Quantity > 0);
-
-            if (categoryValue != null && categoryValue != "ALL")
+            try
             {
-                try
+                List<TblProduct> searchResult = new List<TblProduct>();
+                searchResult = products.FindAll(prod => prod.ProductName.Contains(productName, StringComparison.OrdinalIgnoreCase) && prod.Quantity > 0);
+
+                if (categoryValue != null && categoryValue != "All")
                 {
                     string catId = context.TblCategories.SingleOrDefault(c => c.CategoryName == categoryValue).CategoryId;
                     searchResult = searchResult.Where(p => p.CategoryId == catId).ToList();
                 }
-                catch
-                {
 
-                }
+                UpdateGridViewProducts(searchResult);
             }
+            catch (Exception ex)
+            {
 
-            UpdateGridViewProducts(searchResult);
+            }
         }
 
         private void UpdateGridViewProducts(List<TblProduct> products)
