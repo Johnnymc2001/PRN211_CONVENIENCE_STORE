@@ -134,9 +134,13 @@ namespace DataAccess
                 {
                     staff = ctx.TblStaffs.SingleOrDefault(staff => staff.Email.Equals(Email) && staff.Password.Equals(Password));
                 }
+
                 if (staff != null)
                 {
                     CurrentAccount = staff;
+                } else
+                {
+                    CurrentAccount = null;
                 }
             }
             catch (Exception ex)
