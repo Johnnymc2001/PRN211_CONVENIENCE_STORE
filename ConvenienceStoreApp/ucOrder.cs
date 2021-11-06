@@ -184,8 +184,11 @@ namespace ConvenienceStoreApp
             }
 
             cboPaymentMethod.SelectedIndex = 0;
+            cboCategory.Items.Clear();
             categories = context.TblCategories.ToList<TblCategory>();
+            cboCategory.Items.Add("All");
             categories.ForEach(cat => cboCategory.Items.Add(cat.CategoryName));
+            cboCategory.SelectedIndex = 0;
 
             lblOrderId.Text = $"Order Id: {orderId.ToString()}";
             rtbAction.Text = $"New Order";
