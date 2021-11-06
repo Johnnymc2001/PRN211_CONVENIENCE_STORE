@@ -288,7 +288,7 @@ namespace ConvenienceStoreApp
                                 ProductId = txtProductID.Text,
                                 ProductName = txtProductName.Text,
                                 Price = double.Parse(txtPrice.Text),
-                                Quantity = int.Parse(txtQuantity.Text),
+                                Quantity = Int32.Parse(txtQuantity.Text),
                                 CategoryId = CrtIndex.ToString(),
                                 StatusId = cboStatusID.Text.ToString(),
                                 ImageSrc = null,
@@ -340,6 +340,14 @@ namespace ConvenienceStoreApp
         {
             if (btnUpdate.Text.Equals("Update"))
             {
+                txtProductID.DataBindings.Clear();
+                txtProductName.DataBindings.Clear();
+                txtPrice.DataBindings.Clear();
+                txtQuantity.DataBindings.Clear();
+                cboCategoryID.DataBindings.Clear();
+                cboStatusID.DataBindings.Clear();
+
+
                 txtProductID.Enabled = false;
                 txtProductID.ReadOnly = true;
                 txtProductName.ReadOnly = false;

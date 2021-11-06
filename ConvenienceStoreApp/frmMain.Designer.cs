@@ -413,6 +413,7 @@ namespace ConvenienceStoreApp
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Convenience Store Management";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.panel4.ResumeLayout(false);
