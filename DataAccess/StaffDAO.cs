@@ -132,7 +132,7 @@ namespace DataAccess
                 TblStaff staff = null;
                 using (var ctx = new prn211group4Context())
                 {
-                    staff = ctx.TblStaffs.SingleOrDefault(staff => staff.Email.Equals(Email) && staff.Password.Equals(Password));
+                    staff = ctx.TblStaffs.SingleOrDefault(staff => staff.Email.Equals(Email) && staff.Password.Equals(Password) && staff.StatusId.Equals("Active"));
                 }
 
                 if (staff != null)

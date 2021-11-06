@@ -50,6 +50,7 @@ namespace ConvenienceStoreApp
             this.label4 = new System.Windows.Forms.Label();
             this.cboPaymentMethod = new System.Windows.Forms.ComboBox();
             this.cboCategory = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
@@ -302,20 +303,33 @@ namespace ConvenienceStoreApp
             // 
             // cboCategory
             // 
-            this.cboCategory.FormattingEnabled = true;
+            this.cboCategory.AllowDrop = true;
             this.cboCategory.Items.AddRange(new object[] {
             "All"});
             this.cboCategory.Location = new System.Drawing.Point(356, 84);
             this.cboCategory.Name = "cboCategory";
             this.cboCategory.Size = new System.Drawing.Size(209, 23);
             this.cboCategory.TabIndex = 22;
+            this.cboCategory.Text = "All";
+            this.cboCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCategory.SelectedIndexChanged += new System.EventHandler(this.cboCategory_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(104, 65);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(45, 15);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "Search:";
             // 
             // ucOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.cboCategory);
             this.Controls.Add(this.cboPaymentMethod);
             this.Controls.Add(this.label4);
@@ -371,5 +385,6 @@ namespace ConvenienceStoreApp
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cboPaymentMethod;
         private System.Windows.Forms.ComboBox cboCategory;
+        private System.Windows.Forms.Label label5;
     }
 }

@@ -64,7 +64,7 @@ namespace ConvenienceStoreApp
         private void SearchProducts(string productName, string categoryValue)
         {
             List<TblProduct> searchResult = new List<TblProduct>();
-            searchResult = products.FindAll(prod => prod.ProductName.Contains(productName, StringComparison.OrdinalIgnoreCase));
+            searchResult = products.FindAll(prod => prod.ProductName.Contains(productName, StringComparison.OrdinalIgnoreCase) && prod.Quantity > 0);
 
             if (categoryValue != null && categoryValue != "ALL")
             {

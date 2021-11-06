@@ -94,7 +94,6 @@ namespace ConvenienceStoreApp
 
         private void LoadOtherUI()
         {
-            label_storeName.Text = "Ok con dê";
             label_currentUser.Text = CurrentAccount.FullName;
             label_permission.Text = CurrentAccount.RoleId;
         }
