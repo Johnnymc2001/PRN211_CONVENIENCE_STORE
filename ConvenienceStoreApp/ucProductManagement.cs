@@ -33,6 +33,11 @@ namespace ConvenienceStoreApp
                 cboSelect.SelectedIndex = 0;
                 cboCategoryID.SelectedIndex = 0;
 
+                lbCate.Hide();
+                lbStatus.Hide();
+                cboCategoryID.Hide();
+                cboStatusID.Hide();
+
                 txtProductID.Enabled = false;
                 txtProductID.ReadOnly = true;
                 txtProductName.ReadOnly = true;
@@ -254,6 +259,9 @@ namespace ConvenienceStoreApp
                 btnRefresh.Enabled = false;
                 btnAvailable.Enabled = false;
 
+                lbCate.Show();
+                cboCategoryID.Show();
+
             }
             else if (btnAdd.Text.Equals("Save"))
             {
@@ -294,12 +302,6 @@ namespace ConvenienceStoreApp
                                 StatusId = cboStatusID.Text.ToString(),
                                 ImageSrc = null,
                             };
-                            Trace.WriteLine(product.ProductId);
-                            Trace.WriteLine(product.ProductName);
-                            Trace.WriteLine(product.Price);
-                            Trace.WriteLine(product.Quantity);
-                            Trace.WriteLine(product.CategoryId);
-                            Trace.WriteLine(product.StatusId);
                             if (txtProductID.Enabled)
                             {
                                 repoProduct.Add(product);
@@ -363,6 +365,9 @@ namespace ConvenienceStoreApp
                 btnSearch.Enabled = false;
                 btnRefresh.Enabled = false;
                 btnAvailable.Enabled = false;
+
+                lbCate.Show();
+                cboCategoryID.Show();
             }
             else if(btnUpdate.Text.Equals("Cancel"))
             {
@@ -384,6 +389,11 @@ namespace ConvenienceStoreApp
                 btnSearch.Enabled = true;
                 btnRefresh.Enabled = true;
                 btnAvailable.Enabled = true;
+
+                lbCate.Hide();
+                lbStatus.Hide();
+                cboCategoryID.Hide();
+                cboStatusID.Hide();
             }
         }
     }
