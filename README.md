@@ -1,4 +1,4 @@
-# Group Project
+# CONVENIENCE STORE
 This is a group project for our PRN211 Course from FPT University.
 The project was built on .NET 5.0
 
