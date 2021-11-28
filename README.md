@@ -17,7 +17,7 @@ This a is simple convenience store management system.
   - [**Nguyễn Nam Hoàng Long**](https://github.com/MaruLd)
 
 # Function
-- System contains 4 kind of users type : Admin and Staff
+- System contains 2 kind of users type : Admin and Staff
 
 
 | Function        | Admin | Staff |
